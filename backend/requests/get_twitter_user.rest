@@ -1,0 +1,11 @@
+GET http://localhost:3001/search/!0-
+###
+GET http://localhost:3001/search/ababab
+###
+GET http://localhost:3001/search/ayu4040440404000
+###
+GET http://localhost:3001/search/potus
+###
+GET http://localhost:3001/search/twitter
+###
+GET http://localhost:3001/search/kanyewest
