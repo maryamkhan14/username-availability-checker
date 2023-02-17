@@ -1,0 +1,22 @@
+{
+  "name": "username-availability-checker",
+  "version": "1.0.0",
+  "description": "Run backend and frontend concurrently for testing purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maryamkhan14/username-availability-checker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maryamkhan14/username-availability-checker/issues"
+  },
+  "homepage": "https://github.com/maryamkhan14/username-availability-checker#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
