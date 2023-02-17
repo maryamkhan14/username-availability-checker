@@ -1,9 +1,8 @@
 const axios = require("axios");
 const token = process.env.TWITTER_BEARER_TOKEN;
-const fields = "description,profile_image_url,verified";
 
 const obtainTwitterProfile = async (username) => {
-  const uri = `https://api.twitter.com/2/users/by/username/${username}?user.fields=${fields}`;
+  const uri = `https://api.twitter.com/2/users/by/username/${username}`;
   try {
     // destructure data property from results
     const { data } = await axios.get(uri, {

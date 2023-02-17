@@ -1,3 +1,2 @@
-2023/02/17-11:24:45.193 5d0c Reusing MANIFEST C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Service Worker\Database/MANIFEST-000001
-2023/02/17-11:24:45.193 5d0c Recovering log #3
-2023/02/17-11:24:45.194 5d0c Reusing old log C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Service Worker\Database/000003.log 
+2023/02/17-14:55:52.919 4ea4 Creating DB C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Service Worker\Database since it was missing.
+2023/02/17-14:55:52.924 4ea4 Reusing MANIFEST C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Service Worker\Database/MANIFEST-000001

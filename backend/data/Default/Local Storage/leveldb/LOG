@@ -1,3 +1,5 @@
-2023/02/17-11:25:01.058 7374 Reusing MANIFEST C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Local Storage\leveldb/MANIFEST-000001
-2023/02/17-11:25:01.059 7374 Recovering log #4
-2023/02/17-11:25:01.059 7374 Reusing old log C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Local Storage\leveldb/000004.log 
+2023/02/17-14:56:02.980 7f94 Reusing MANIFEST C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Local Storage\leveldb/MANIFEST-000001
+2023/02/17-14:56:02.981 7f94 Recovering log #3
+2023/02/17-14:56:02.982 7f94 Level-0 table #3: started
+2023/02/17-14:56:02.985 7f94 Level-0 table #3: 35618 bytes OK
+2023/02/17-14:56:02.987 7f94 Delete type=0 #3

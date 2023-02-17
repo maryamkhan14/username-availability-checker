@@ -1,3 +1,2 @@
-2023/02/17-11:24:45.181 2628 Reusing MANIFEST C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Local Storage\leveldb/MANIFEST-000001
-2023/02/17-11:24:45.182 2628 Recovering log #4
-2023/02/17-11:24:45.183 2628 Reusing old log C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Local Storage\leveldb/000004.log 
+2023/02/17-14:55:48.078 6118 Creating DB C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Local Storage\leveldb since it was missing.
+2023/02/17-14:55:48.090 6118 Reusing MANIFEST C:\Users\marya\Desktop\username-availability-checker\backend\data\Default\Local Storage\leveldb/MANIFEST-000001
