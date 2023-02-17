@@ -1,0 +1,4 @@
+root/node_modules
+root/frontend/node_modules
+root/backend/node_modules
+root/backend/.env
