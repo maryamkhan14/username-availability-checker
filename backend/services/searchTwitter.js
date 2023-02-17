@@ -12,30 +12,39 @@ const obtainTwitterProfile = async (username) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(data);
     // return object contained inside data property
     return { ...data };
   } catch (e) {
-    return { errors: e.response.data };
+    return { errors: e.response.data.errors };
   }
 };
 const generateErrorMessages = (error) => {
-  return error.errors
+  return error.message
     ? {
-        // AxiosError objects have errors array inside of them, and their message property is called message
-        errorMsg: `Error: ${error.errors[0].message}. Try again.`,
+        // AxiosError objects' error message property is called message
+        msg: `Error: ${error.message}. Try again.`,
       }
     : {
-        // Twitter API error results do not have that array, and their message pr is called detail
-        errorMsg: `Error: ${error[0].detail} Try again.`,
+        // Twitter API error results do not have that array, and their message property is called detail
+        msg: `Error: ${error.detail} Try again.`,
       };
 };
 const searchTwitter = async (username) => {
   const { data, errors } = await obtainTwitterProfile(username);
-  if (errors) {
-    return { ...generateErrorMessages(errors), status: 400 };
-  } else {
-    return { profile: data, status: 200 };
+  if (errors && errors[0].title && errors[0].title === "Not Found Error") {
+    return {
+      msg: `The Twitter username [${username}] exists!`,
+      status: 200,
+    };
+  } else if (errors) {
+    return { ...generateErrorMessages(errors[0]), status: 400 };
+  } else if (data) {
+    return {
+      ...generateErrorMessages({
+        detail: `The Twitter username [${username}] is taken. `,
+      }),
+      status: 400,
+    };
   }
 };
 module.exports = { searchTwitter };

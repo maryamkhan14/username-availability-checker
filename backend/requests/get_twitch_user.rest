@@ -1,0 +1,11 @@
+GET http://localhost:3001/search/$
+###
+GET http://localhost:3001/search/Worldly-Terwewer
+###
+GET http://localhost:3001/search/ayu4040440404000
+###
+GET http://localhost:3001/search/abcdeidontexist
+###
+GET http://localhost:3001/search/twitter
+###
+GET http://localhost:3001/search/eeee4444444444444eeeeee1

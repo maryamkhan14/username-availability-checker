@@ -1,7 +1,7 @@
-const { searchTwitter } = require("../services/searchTwitter");
-
-const searchAllNetworks = async (req, res) => {
-  const twitterData = await searchTwitter(req.params.username);
-  console.log(twitterData);
+const { searchAllNetworks } = require("../services/searchAllNetworks");
+const searchProfilesController = async (req, res) => {
+  const results = await searchAllNetworks(req.params.username);
+  console.log(results);
+  res.status(200).json(results);
 };
-module.exports = { searchAllNetworks };
+module.exports = { searchProfilesController };
