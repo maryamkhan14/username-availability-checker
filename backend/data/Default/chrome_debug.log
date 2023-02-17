@@ -1,0 +1,8 @@
+[0217/112502.342:INFO:CONSOLE(2)] "setTimer 清空数据", source: https://lf16-tiktok-web.tiktokcdn-us.com/obj/tiktok-web-tx/tiktok/webapp/main/webapp-desktop/npm-async-eb873fff.9faec0103613636fec29.js (2)
+[0217/112502.346:INFO:CONSOLE(2)] "checkIsBrowser()  true", source: https://lf16-tiktok-web.tiktokcdn-us.com/obj/tiktok-web-tx/tiktok/webapp/main/webapp-desktop/npm-async-eb873fff.9faec0103613636fec29.js (2)
+[0217/112502.745:INFO:CONSOLE(0)] "[.WebGL-000062A400981C00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://www.tiktok.com/@kanyewest (0)
+[0217/112502.849:INFO:CONSOLE(1)] ".", source: https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/webmssdk/1.0.0.12/webmssdk.js (1)
+[0217/112502.853:ERROR:web_contents_delegate.cc(239)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[0217/112502.854:ERROR:web_contents_delegate.cc(239)] WebContentsDelegate::CheckMediaAccessPermission: Not supported.
+[0217/112502.969:INFO:CONSOLE(13)] "channel must sg ,va!!!", source: https://sf16-website-login.neutral.ttwstatic.com/obj/tiktok_web_login_static/pns/tiktok-cookie-banner/1.0.0.188/default.ttp.esm.js (13)
+[0217/112503.058:INFO:CONSOLE(1)] "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently", source: https://s20.tiktokcdn.com/tiktok/common/init.js?seed=AIBfv2CGAQAA0D_CgeRr5iwEMkD1wW8MjeFFf--5V1ClqCH_-Ou-va4hb-lr&hTc6j8Njvn--z=q (1)
