@@ -12,31 +12,22 @@ const scrapeTiktok = async (searchURL) => {
   });
 
   const page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(0);
   //turns request interceptor on
   await page.setRequestInterception(true);
 
-  //if the page makes a  request to a resource type of image or stylesheet then abort that request
   page.on("request", (request) => {
-    if (
-      request.resourceType() === "image" ||
-      request.resourceType() === "stylesheet"
-    )
-      request.abort();
+    if (request.resourceType() !== "document") request.abort();
     else request.continue();
   });
 
+  page.on("response", (response) => {
+    userAvailable = true;
+    console.log("Response: ", response.status(), response.url());
+  });
+  //if the page makes a  request to a resource type of image or stylesheet then abort that request
+
   try {
     await page.goto(searchURL);
-    let noSuchUser = await page.$x(
-      '//div[@class="tiktok-1osbocj-DivErrorContainer emuynwa0"]',
-      { timeout: 3000 }
-    );
-    if (noSuchUser.length > 0) {
-      userAvailable = true;
-    } else {
-      userAvailable = false;
-    }
   } catch (error) {
     console.error(error);
     errors = { error };
@@ -62,6 +53,7 @@ const generateErrorMessages = (scrapeError, username) => {
 
 const obtainTiktokProfile = async (username) => {
   let { errors, userAvailable } = await scrapeTiktok(`${BASE_URL}@${username}`);
+  console.log("Received results from Tiktok scraper");
   if (errors) {
     // true if error has to do with tiktok scraping
     return { ...generateErrorMessages(true, username), status: 400 };
