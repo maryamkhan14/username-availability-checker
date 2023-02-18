@@ -18,7 +18,7 @@ const scrapeTiktok = async (searchURL) => {
   page.on("request", (request) => {
     if (
       request.resourceType() === "image" ||
-      req.resourceType() === "stylesheet"
+      request.resourceType() === "stylesheet"
     )
       request.abort();
     else request.continue();
