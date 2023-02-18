@@ -4,7 +4,7 @@ const scrapeTiktok = async (searchURL) => {
   let userAvailable = false;
   let errors = null;
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     userDataDir: "./data",
     fastStart: true,
     args: [
