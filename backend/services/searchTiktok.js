@@ -1,11 +1,13 @@
 const puppeteer = require("puppeteer");
+const path = require("path");
 const BASE_URL = "https://www.tiktok.com/";
 const scrapeTiktok = async (searchURL) => {
   let userAvailable = false;
   let errors = null;
+  const userDataDirPath = path.join(__dirname, "/data");
   const browser = await puppeteer.launch({
     headless: true,
-    userDataDir: `${__dirname}\data`,
+    userDataDir: `${userDataDirPath}`,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
