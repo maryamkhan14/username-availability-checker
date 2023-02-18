@@ -45,5 +45,6 @@ const searchTwitter = async (username) => {
       status: 400,
     };
   }
+  return data;
 };
 module.exports = { searchTwitter };
