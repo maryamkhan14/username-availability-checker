@@ -8,12 +8,13 @@ const scrapeTiktok = async (searchURL) => {
     userDataDir: "./data",
     fastStart: true,
   });
-  const page = await browser.pages().then((e) => e[0]);
-  await page.goto(searchURL);
 
   try {
+    const page = await browser.newPage();
+    await page.goto(searchURL);
     let noSuchUser = await page.$x(
-      '//div[@class="tiktok-1osbocj-DivErrorContainer emuynwa0"]'
+      '//div[@class="tiktok-1osbocj-DivErrorContainer emuynwa0"]',
+      { timeout: 3000 }
     );
     if (noSuchUser.length > 0) {
       userAvailable = true;
