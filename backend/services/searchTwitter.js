@@ -21,18 +21,18 @@ const generateErrorMessages = (error) => {
   return error.message
     ? {
         // AxiosError objects' error message property is called message
-        msg: `Error: ${error.message}. Try again.`,
+        msg: `Error: ${error.message}.`,
       }
     : {
         // Twitter API error results do not have that array, and their message property is called detail
-        msg: `Error: ${error.detail} Try again.`,
+        msg: `Error: ${error.detail}.`,
       };
 };
 const searchTwitter = async (username) => {
   const { data, errors } = await obtainTwitterProfile(username);
   if (errors && errors[0].title && errors[0].title === "Not Found Error") {
     return {
-      msg: `The Twitter username [${username}] exists!`,
+      msg: `The Twitter username [${username}] is available!`,
       status: 200,
     };
   } else if (errors) {

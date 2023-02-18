@@ -11,6 +11,19 @@ const scrapeTiktok = async (searchURL) => {
 
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
+  //turns request interceptor on
+  await page.setRequestInterception(true);
+
+  //if the page makes a  request to a resource type of image or stylesheet then abort that request
+  page.on("request", (request) => {
+    if (
+      request.resourceType() === "image" ||
+      req.resourceType() === "stylesheet"
+    )
+      request.abort();
+    else request.continue();
+  });
+
   try {
     await page.goto(searchURL);
     let noSuchUser = await page.$x(
@@ -48,7 +61,6 @@ const generateErrorMessages = (scrapeError, username) => {
 const obtainTiktokProfile = async (username) => {
   let { errors, userAvailable } = await scrapeTiktok(`${BASE_URL}@${username}`);
   if (errors) {
-    console.log(errors);
     // true if error has to do with tiktok scraping
     return { ...generateErrorMessages(true, username), status: 400 };
   } else if (!userAvailable) {
