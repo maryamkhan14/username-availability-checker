@@ -5,7 +5,7 @@ const scrapeTiktok = async (searchURL) => {
   let errors = null;
   const browser = await puppeteer.launch({
     headless: true,
-    userDataDir: "./data",
+    userDataDir: `${__dirname}\data`,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
