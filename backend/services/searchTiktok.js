@@ -4,13 +4,18 @@ const scrapeTiktok = async (searchURL) => {
   let userAvailable = false;
   let errors = null;
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     userDataDir: "./data",
     fastStart: true,
+    args: [
+      `https://username-availability-checker-backend.onrender.com/${
+        process.env.PORT || 3001
+      }`,
+    ],
   });
 
   const page = await browser.newPage();
-
+  await page.setDefaultNavigationTimeout(0);
   try {
     await page.goto(searchURL);
     let noSuchUser = await page.$x(
