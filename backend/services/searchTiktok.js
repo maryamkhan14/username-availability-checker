@@ -22,6 +22,7 @@ const scrapeTiktok = async (searchURL) => {
       userAvailable = false;
     }
   } catch (error) {
+    console.error(error);
     errors = { error };
   }
 
