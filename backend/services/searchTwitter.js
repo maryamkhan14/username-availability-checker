@@ -12,13 +12,12 @@ const obtainTwitterProfile = async (username) => {
       },
     });
     // return object contained inside data property
-    return { data };
+    return { ...data };
   } catch (e) {
     return { errors: e.response.data.errors };
   }
 };
 const generateErrorMessages = (error) => {
-  console.log(error);
   return error.message
     ? {
         // AxiosError objects' error message property is called message
@@ -30,7 +29,21 @@ const generateErrorMessages = (error) => {
       };
 };
 const searchTwitter = async (username) => {
-  const results = await obtainTwitterProfile(username);
-  return results;
+  const { data, errors } = await obtainTwitterProfile(username);
+  if (errors && errors[0].title && errors[0].title === "Not Found Error") {
+    return {
+      msg: `The Twitter username [${username}] exists!`,
+      status: 200,
+    };
+  } else if (errors) {
+    return { ...generateErrorMessages(errors[0]), status: 400 };
+  } else if (data) {
+    return {
+      ...generateErrorMessages({
+        detail: `The Twitter username [${username}] is taken. `,
+      }),
+      status: 400,
+    };
+  }
 };
 module.exports = { searchTwitter };
