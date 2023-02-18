@@ -11,6 +11,8 @@ const scrapeTiktok = async (searchURL) => {
       `--proxy-server=https://username-availability-checker-backend.onrender.com/${
         process.env.PORT || 3001
       }`,
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
     ],
   });
 
