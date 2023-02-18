@@ -8,7 +8,7 @@ const scrapeTiktok = async (searchURL) => {
     userDataDir: "./data",
     fastStart: true,
     args: [
-      `https://username-availability-checker-backend.onrender.com/${
+      `--proxy-server=https://username-availability-checker-backend.onrender.com/${
         process.env.PORT || 3001
       }`,
     ],
