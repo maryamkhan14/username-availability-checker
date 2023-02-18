@@ -29,7 +29,8 @@ const generateErrorMessages = (error) => {
       };
 };
 const searchTwitter = async (username) => {
-  const { data, errors } = await obtainTwitterProfile(username);
+  const results = await obtainTwitterProfile(username);
+  const { data, errors } = results;
   if (errors && errors[0].title && errors[0].title === "Not Found Error") {
     return {
       msg: `The Twitter username [${username}] exists!`,
