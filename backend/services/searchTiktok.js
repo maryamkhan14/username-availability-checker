@@ -9,8 +9,9 @@ const scrapeTiktok = async (searchURL) => {
     fastStart: true,
   });
 
+  const page = await browser.newPage();
+
   try {
-    const page = await browser.newPage();
     await page.goto(searchURL);
     let noSuchUser = await page.$x(
       '//div[@class="tiktok-1osbocj-DivErrorContainer emuynwa0"]',
