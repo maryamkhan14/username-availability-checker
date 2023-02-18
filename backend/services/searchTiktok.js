@@ -1,21 +1,12 @@
 const puppeteer = require("puppeteer");
 const BASE_URL = "https://www.tiktok.com/";
-const proxyChain = require("proxy-chain");
 const scrapeTiktok = async (searchURL) => {
-  const oldProxyUrl = `https://username-availability-checker-backend.onrender.com/${
-    process.env.PORT || 3001
-  }`;
-  const newProxyUrl = await proxyChain.anonymizeProxy(oldProxyUrl);
   let userAvailable = false;
   let errors = null;
   const browser = await puppeteer.launch({
     headless: true,
     userDataDir: "./data",
-    args: [
-      `--proxy-server=${newProxyUrl}`,
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-    ],
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
   const page = await browser.newPage();
