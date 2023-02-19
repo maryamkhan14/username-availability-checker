@@ -20,6 +20,7 @@ const searchProfilesController = (req, res) => {
     twitterSearch(req.params.username),
     redditSearch(req.params.username),
     twitchSearch(req.params.username),
+    tiktokSearch(req.params.username),
   ])
     .then((data) => data.map((result) => JSON.stringify(result)))
     .then((dataArr) => res.status(200).json(dataArr));
