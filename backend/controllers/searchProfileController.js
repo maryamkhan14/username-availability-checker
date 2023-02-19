@@ -4,19 +4,20 @@ const { searchReddit } = require("../services/searchReddit");
 const { searchTiktok } = require("../services/searchTiktok");
 const { searchAllNetworks } = require("../services/searchAllNetworks");
 const searchProfilesController = (req, res) => {
+  res.writeHead(200, { "Content-Type": "application/json" });
   searchTwitter(req.params.username).then((twitterData) =>
-    res.write({ twitterData: twitterData })
+    res.write(JSON.stringify({ twitterData: twitterData }))
   );
   searchTwitch(req.params.username).then((twitchData) => {
-    res.write({ twitchData: twitchData });
+    res.write(JSON.stringify({ twitchData: twitchData }));
   });
   searchReddit(req.params.username).then((redditData) => {
-    res.write({ redditData: redditData });
+    res.write(JSON.stringify({ redditData: redditData }));
   });
   searchTiktok(req.params.username).then((tiktokData) => {
-    res.write({ tiktokData: tiktokData });
+    res.write(JSON.stringify({ tiktokData: tiktokData }));
   });
 
-  res.writeHead(200, { "Content-Type": "application/json" }).end();
+  res.end();
 };
 module.exports = { searchProfilesController };
