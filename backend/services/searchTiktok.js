@@ -12,24 +12,23 @@ const scrapeTiktok = async (searchURL) => {
   });
 
   const page = await browser.newPage();
-  //turns request interceptor on
+  // turns request interceptor on
   await page.setRequestInterception(true);
 
   page.on("request", (request) => {
+    // cancel requests of unnecessary resource types (CSS, images, etc)
     if (request.resourceType() !== "document") request.abort();
     else request.continue();
   });
 
   page.on("response", (response) => {
-    userAvailable = true;
-    console.log("Response: ", response.status(), response.url());
+    // 200 status code is returned when existing profile is found
+    if (response.status !== 200) userAvailable = true;
   });
-  //if the page makes a  request to a resource type of image or stylesheet then abort that request
 
   try {
     await page.goto(searchURL);
   } catch (error) {
-    console.error(error);
     errors = { error };
   }
 
@@ -47,13 +46,12 @@ const generateErrorMessages = (scrapeError, username) => {
       }
     : {
         // Twitch username already exists
-        msg: `Error: The username [${username}] is taken.`,
+        msg: `Error: The Tiktok username [${username}] is taken.`,
       };
 };
 
 const obtainTiktokProfile = async (username) => {
   let { errors, userAvailable } = await scrapeTiktok(`${BASE_URL}@${username}`);
-  console.log("Received results from Tiktok scraper");
   if (errors) {
     // true if error has to do with tiktok scraping
     return { ...generateErrorMessages(true, username), status: 400 };
@@ -61,7 +59,7 @@ const obtainTiktokProfile = async (username) => {
     return { ...generateErrorMessages(false, username), status: 400 };
   } else {
     return {
-      msg: `The username ${username} is available!`,
+      msg: `The Tiktok username [${username}] is available!`,
       status: 200,
     };
   }

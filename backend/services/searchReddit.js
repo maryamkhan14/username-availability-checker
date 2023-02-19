@@ -26,7 +26,7 @@ const generateErrorMessages = ({ error, username }) => {
         msg: `Error: ${error}. Try again.`,
       }
     : {
-        msg: `Error: The username [${username}] is taken.`,
+        msg: `Error: The Reddit username [${username}] is taken.`,
       };
 };
 const searchReddit = async (username) => {
@@ -38,7 +38,7 @@ const searchReddit = async (username) => {
     return { ...generateErrorMessages({ username }), status: 400 };
   } else {
     return {
-      msg: `The username ${username} is available!`,
+      msg: `The Reddit username [${username}] is available!`,
       status: 200,
     };
   }

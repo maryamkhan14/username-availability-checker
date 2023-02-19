@@ -28,7 +28,7 @@ const generateErrorMessages = ({ login: username, error, message }) => {
       }
     : {
         // Twitch username already exists
-        msg: `Error: The username [${username}] is taken.`,
+        msg: `Error: The Twitch username [${username}] is taken.`,
       };
 };
 const searchTwitch = async (username) => {
@@ -40,7 +40,7 @@ const searchTwitch = async (username) => {
     return { ...generateErrorMessages(data[0]), status: 400 };
   } else {
     return {
-      msg: `The username ${username} is available!`,
+      msg: `The Twitch username ${username} is available!`,
       status: 200,
     };
   }
