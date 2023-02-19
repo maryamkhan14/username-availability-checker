@@ -15,14 +15,24 @@ const twitchSearch = (username) => {
 const tiktokSearch = (username) => {
   return searchTiktok(username);
 };
-const searchProfilesController = (req, res) => {
-  Promise.all([
+const searchProfilesController = async (req, res) => {
+  res.writeHead(200, {
+    "Content-Type": "application/json",
+    "Transfer-Encoding": "chunked",
+  });
+  res.write("[");
+  await Promise.all([
     twitterSearch(req.params.username),
     redditSearch(req.params.username),
     twitchSearch(req.params.username),
-    tiktokSearch(req.params.username),
-  ])
-    .then((data) => data.map((result) => JSON.stringify(result)))
-    .then((dataArr) => res.status(200).json(dataArr));
+  ]).then((results) =>
+    results.map((result) => {
+      res.write(JSON.stringify(result) + ",");
+    })
+  );
+  await tiktokSearch(req.params.username).then((result) => {
+    res.write(JSON.stringify(result) + "]");
+    res.end();
+  });
 };
 module.exports = { searchProfilesController };
