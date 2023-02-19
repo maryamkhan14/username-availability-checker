@@ -4,7 +4,7 @@ const { searchReddit } = require("../services/searchReddit");
 const { searchTiktok } = require("../services/searchTiktok");
 const { searchAllNetworks } = require("../services/searchAllNetworks");
 const searchProfilesController = (req, res) => {
-  res.setHeader(200, { "Content-Type": "application/json" });
+  res.writeHead(200, { "Content-Type": "application/json" });
 
   searchTwitter(req.params.username).then((twitterData) =>
     res.write({ twitterData: twitterData })
