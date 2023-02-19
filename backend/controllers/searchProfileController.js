@@ -4,31 +4,24 @@ const { searchReddit } = require("../services/searchReddit");
 const { searchTiktok } = require("../services/searchTiktok");
 const { searchAllNetworks } = require("../services/searchAllNetworks");
 const twitterSearch = (username) => {
-  return searchTwitter(username).then((twitterData) =>
-    JSON.stringify({ twitterData: twitterData })
-  );
+  return searchTwitter(username);
 };
 const redditSearch = (username) => {
-  return searchReddit(username).then((redditData) => {
-    return JSON.stringify({ redditData: redditData });
-  });
+  return searchReddit(username);
 };
 const twitchSearch = (username) => {
-  return searchTwitch(username).then((twitchData) => {
-    return JSON.stringify({ twitchData: twitchData });
-  });
+  return searchTwitch(username);
 };
 const tiktokSearch = (username) => {
-  return searchTiktok(username).then((tiktokData) => {
-    JSON.stringify({ tiktokData: tiktokData });
-  });
+  return searchTiktok(username);
 };
 const searchProfilesController = (req, res) => {
   Promise.all([
     twitterSearch(req.params.username),
     redditSearch(req.params.username),
     twitchSearch(req.params.username),
-    tiktokSearch(req.params.username),
-  ]).then((data) => res.status(200).json(data));
+  ])
+    .then((data) => data.map((result) => JSON.stringify(result)))
+    .then((dataArr) => res.status(200).json(dataArr));
 };
 module.exports = { searchProfilesController };
