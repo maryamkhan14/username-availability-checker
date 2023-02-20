@@ -15,11 +15,15 @@ const scrapeTiktok = async (searchURL) => {
   // turns request interceptor on
   await page.setRequestInterception(true);
 
+  page.on("request", (request) => {
+    // cancel requests of unnecessary resource types (CSS, images, etc)
+    console.log(request);
+    request.continue();
+  });
+
   page.on("response", (response) => {
     console.log(userAvailable);
     console.log(response);
-
-    console.log(response.status);
     // 200 status code is returned when existing profile is found
     if (response.status !== 200) userAvailable = true;
   });
@@ -37,6 +41,7 @@ const scrapeTiktok = async (searchURL) => {
 };
 
 const generateErrorMessages = (scrapeError, username) => {
+  console.error(scrapeError);
   return scrapeError
     ? {
         // Error in scraping Tiktok
