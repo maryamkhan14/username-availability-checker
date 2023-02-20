@@ -3,17 +3,25 @@ const { searchTwitch } = require("../services/searchTwitch");
 const { searchReddit } = require("../services/searchReddit");
 const { searchTiktok } = require("../services/searchTiktok");
 const { searchAllNetworks } = require("../services/searchAllNetworks");
-const twitterSearch = (username) => {
-  return { twitterData: searchTwitter(username) };
+const twitterSearch = async (username) => {
+  return await searchTwitter(username).then((data) => {
+    twitterData: data;
+  });
 };
-const redditSearch = (username) => {
-  return { redditData: searchReddit(username) };
+const redditSearch = async (username) => {
+  return await searchReddit(username).then((data) => {
+    redditData: data;
+  });
 };
-const twitchSearch = (username) => {
-  return { twitchData: searchTwitch(username) };
+const twitchSearch = async (username) => {
+  return await searchTwitch(username).then((data) => {
+    twitchData: data;
+  });
 };
-const tiktokSearch = (username) => {
-  return { tiktokData: searchTiktok(username) };
+const tiktokSearch = async (username) => {
+  return await searchTiktok(username).then((data) => {
+    tiktokData: data;
+  });
 };
 const searchProfilesController = async (req, res) => {
   res.writeHead(200, {
