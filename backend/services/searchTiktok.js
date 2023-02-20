@@ -15,18 +15,11 @@ const scrapeTiktok = async (searchURL) => {
   // turns request interceptor on
   await page.setRequestInterception(true);
 
-  page.on("request", (request) => {
-    // cancel requests of unnecessary resource types (CSS, images, etc)
-    if (request.resourceType() !== "document") request.abort();
-    else {
-      console.log(request);
-      request.continue();
-    }
-  });
-
   page.on("response", (response) => {
     console.log(userAvailable);
     console.log(response);
+
+    console.log(response.status);
     // 200 status code is returned when existing profile is found
     if (response.status !== 200) userAvailable = true;
   });
