@@ -3,44 +3,26 @@ const { searchTwitch } = require("../services/searchTwitch");
 const { searchReddit } = require("../services/searchReddit");
 const { searchTiktok } = require("../services/searchTiktok");
 const { searchAllNetworks } = require("../services/searchAllNetworks");
-const twitterSearch = async (username) => {
-  return await searchTwitter(username).then((data) => {
-    twitterData: data;
-  });
+const twitterSearch = (username) => {
+  return searchTwitter(username);
 };
-const redditSearch = async (username) => {
-  return await searchReddit(username).then((data) => {
-    redditData: data;
-  });
+const redditSearch = (username) => {
+  return searchReddit(username);
 };
-const twitchSearch = async (username) => {
-  return await searchTwitch(username).then((data) => {
-    twitchData: data;
-  });
+const twitchSearch = (username) => {
+  return searchTwitch(username);
 };
-const tiktokSearch = async (username) => {
-  return await searchTiktok(username).then((data) => {
-    tiktokData: data;
-  });
+const tiktokSearch = (username) => {
+  return searchTiktok(username);
 };
-const searchProfilesController = async (req, res) => {
-  res.writeHead(200, {
-    "Content-Type": "application/json",
-    "Transfer-Encoding": "chunked",
-  });
-  res.write("[");
-  await Promise.all([
+const searchProfilesController = (req, res) => {
+  Promise.all([
     twitterSearch(req.params.username),
     redditSearch(req.params.username),
     twitchSearch(req.params.username),
-  ]).then((results) =>
-    results.map((result) => {
-      res.write(JSON.stringify(result) + ",");
-    })
-  );
-  await tiktokSearch(req.params.username).then((result) => {
-    res.write(JSON.stringify(result) + "]");
-    res.end();
-  });
+    tiktokSearch(req.params.username),
+  ])
+    .then((data) => data.map((result) => JSON.stringify(result)))
+    .then((dataArr) => res.status(200).json(dataArr));
 };
 module.exports = { searchProfilesController };
