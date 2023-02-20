@@ -23,7 +23,7 @@ const scrapeTiktok = async (searchURL) => {
 
   page.on("response", (response) => {
     console.log(userAvailable);
-    console.log(response);
+    console.log(response.status);
     // 200 status code is returned when existing profile is found
     if (response.status !== 200) userAvailable = true;
   });
