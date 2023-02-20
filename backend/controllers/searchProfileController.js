@@ -1,5 +1,8 @@
+const { searchTwitter } = require("../services/searchTwitter");
 const { searchTiktok } = require("../services/searchTiktok");
-const { searchAllNetworks } = require("../services/searchAllNetworks");
+const { searchTwitch } = require("../services/searchTwitch");
+const { searchReddit } = require("../services/searchReddit");
+
 const twitterSearch = (username) => {
   return searchTwitter(username);
 };
