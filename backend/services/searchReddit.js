@@ -33,13 +33,22 @@ const searchReddit = async (username) => {
   const { data, errors } = await obtainRedditProfile(username);
 
   if (errors) {
-    return { ...generateErrorMessages({ error: errors[0][1] }), status: 400 };
+    return {
+      redditData: {
+        ...generateErrorMessages({ error: errors[0][1] }),
+        status: 400,
+      },
+    };
   } else if (!data) {
-    return { ...generateErrorMessages({ username }), status: 400 };
+    return {
+      redditData: { ...generateErrorMessages({ username }), status: 400 },
+    };
   } else {
     return {
-      msg: `The Reddit username [${username}] is available!`,
-      status: 200,
+      redditData: {
+        msg: `The Reddit username [${username}] is available!`,
+        status: 200,
+      },
     };
   }
 };

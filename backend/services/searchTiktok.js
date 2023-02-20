@@ -54,13 +54,19 @@ const obtainTiktokProfile = async (username) => {
   let { errors, userAvailable } = await scrapeTiktok(`${BASE_URL}@${username}`);
   if (errors) {
     // true if error has to do with tiktok scraping
-    return { ...generateErrorMessages(true, username), status: 400 };
+    return {
+      tiktokData: { ...generateErrorMessages(true, username), status: 400 },
+    };
   } else if (!userAvailable) {
-    return { ...generateErrorMessages(false, username), status: 400 };
+    return {
+      tiktokData: { ...generateErrorMessages(false, username), status: 400 },
+    };
   } else {
     return {
-      msg: `The Tiktok username [${username}] is available!`,
-      status: 200,
+      tiktokData: {
+        msg: `The Tiktok username [${username}] is available!`,
+        status: 200,
+      },
     };
   }
 };

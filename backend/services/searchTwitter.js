@@ -32,17 +32,23 @@ const searchTwitter = async (username) => {
   const { data, errors } = await obtainTwitterProfile(username);
   if (errors && errors[0].title && errors[0].title === "Not Found Error") {
     return {
-      msg: `The Twitter username [${username}] is available!`,
-      status: 200,
+      twitterData: {
+        msg: `The Twitter username [${username}] is available!`,
+        status: 200,
+      },
     };
   } else if (errors) {
-    return { ...generateErrorMessages(errors[0]), status: 400 };
+    return {
+      twitterData: { ...generateErrorMessages(errors[0]), status: 400 },
+    };
   } else if (data) {
     return {
-      ...generateErrorMessages({
-        detail: `The Twitter username [${username}] is taken. `,
-      }),
-      status: 400,
+      twitterData: {
+        ...generateErrorMessages({
+          detail: `The Twitter username [${username}] is taken. `,
+        }),
+        status: 400,
+      },
     };
   }
 };
