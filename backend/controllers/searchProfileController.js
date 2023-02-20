@@ -4,16 +4,16 @@ const { searchReddit } = require("../services/searchReddit");
 const { searchTiktok } = require("../services/searchTiktok");
 const { searchAllNetworks } = require("../services/searchAllNetworks");
 const twitterSearch = (username) => {
-  return searchTwitter(username);
+  return { twitterData: searchTwitter(username) };
 };
 const redditSearch = (username) => {
-  return searchReddit(username);
+  return { redditData: searchReddit(username) };
 };
 const twitchSearch = (username) => {
-  return searchTwitch(username);
+  return { twitchData: searchTwitch(username) };
 };
 const tiktokSearch = (username) => {
-  return searchTiktok(username);
+  return { tiktokData: searchTiktok(username) };
 };
 const searchProfilesController = async (req, res) => {
   res.writeHead(200, {
