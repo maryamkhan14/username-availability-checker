@@ -16,9 +16,7 @@ const tiktokSearch = (username) => {
   return searchTiktok(username);
 };
 const searchProfilesController = async (req, res) => {
-  res.setHeader({
-    "Access-Control-Allow-Origin": "*",
-  });
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.writeHead(200, {
     "Access-Control-Expose-Headers": "Access-Control-Allow-Origin",
     "Content-Type": "text/event-stream",
