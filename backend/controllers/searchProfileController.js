@@ -17,24 +17,25 @@ const tiktokSearch = (username) => {
 };
 const searchProfilesController = async (req, res) => {
   res.writeHead(200, {
-    "Transfer-Encoding": "chunked",
     "Content-Type": "text/event-stream",
     Connection: "keep-alive",
     "Cache-Control": "no-cache",
     "Access-Control-Allow-Origin": "*",
   });
-  res.write("[");
+  res.write("\n\n");
   await Promise.all([
     twitterSearch(req.params.username),
     redditSearch(req.params.username),
     twitchSearch(req.params.username),
   ]).then((results) =>
     results.map((result) => {
-      res.write(JSON.stringify(result) + ",");
+      res.write(JSON.stringify(result));
+      res.write("\n\n");
     })
   );
   await tiktokSearch(req.params.username).then((result) => {
-    res.write(JSON.stringify(result) + "]");
+    res.write(JSON.stringify(result));
+    res.write("\n\n");
     res.end();
   });
 };
