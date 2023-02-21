@@ -16,11 +16,13 @@ const tiktokSearch = (username) => {
   return searchTiktok(username);
 };
 const searchProfilesController = async (req, res) => {
+  res.setHeader({
+    "Access-Control-Allow-Origin": "*",
+  });
   res.writeHead(200, {
     "Content-Type": "text/event-stream",
     Connection: "keep-alive",
     "Cache-Control": "no-cache",
-    "Access-Control-Allow-Origin": "*",
   });
   res.write("\n\n");
   await Promise.all([
