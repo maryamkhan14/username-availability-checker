@@ -23,20 +23,17 @@ const searchProfilesController = async (req, res) => {
     Connection: "keep-alive",
     "Cache-Control": "no-cache",
   });
-  res.write("\n\n");
   await Promise.all([
     twitterSearch(req.params.username),
     redditSearch(req.params.username),
     twitchSearch(req.params.username),
   ]).then((results) =>
     results.map((result) => {
-      res.write(JSON.stringify(result));
-      res.write("\n\n");
+      res.write("data: " + JSON.stringify(result) + "\n\n");
     })
   );
   await tiktokSearch(req.params.username).then((result) => {
-    res.write(JSON.stringify(result));
-    res.write("\n\n");
+    res.write("data: " + JSON.stringify(result) + "\n\n");
   });
 };
 module.exports = { searchProfilesController };
