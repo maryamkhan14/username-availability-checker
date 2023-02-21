@@ -20,6 +20,7 @@ const searchProfilesController = async (req, res) => {
     "Access-Control-Allow-Origin": "*",
   });
   res.writeHead(200, {
+    "Access-Control-Expose-Headers": "Access-Control-Allow-Origin",
     "Content-Type": "text/event-stream",
     Connection: "keep-alive",
     "Cache-Control": "no-cache",
