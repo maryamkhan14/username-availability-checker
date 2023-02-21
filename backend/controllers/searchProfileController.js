@@ -36,6 +36,7 @@ const searchProfilesController = async (req, res) => {
   await tiktokSearch(req.params.username).then((result) => {
     res.write(JSON.stringify(result));
     res.write("\n\n");
+    res.end();
   });
 };
 module.exports = { searchProfilesController };
