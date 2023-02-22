@@ -10,7 +10,7 @@ const Navbar = () => {
       alignItems="center"
       container
     >
-      <Typography variant="h3">Twitter Profile Grab</Typography>
+      <Typography variant="h3">Is your dream username available?</Typography>
     </Grid>
   );
 };
