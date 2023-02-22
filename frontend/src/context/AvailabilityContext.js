@@ -24,7 +24,16 @@ export const usernameAvailabilityReducer = (state, action) => {
         results: { ...state.results, tiktokData: action.payload },
       };
     case "SET_SSE_ERROR":
-      return { ...state, sseErrors: action.payload };
+      return {
+        ...state,
+        errors: { ...state.errors, sseError: action.payload },
+      };
+
+    case "SET_INPUT_ERROR":
+      return {
+        ...state,
+        errors: { ...state.errors, inputError: action.payload },
+      };
     case "SET_SEARCH_ACTIVE":
       return { ...state, searchActive: action.payload };
     case "SET_SEARCH_INACTIVE":
@@ -38,7 +47,7 @@ export const AvailabilityContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(usernameAvailabilityReducer, {
     results: {},
     searchActive: false,
-    sseErrors: null,
+    errors: {},
   });
   return (
     <AvailabilityContext.Provider value={{ ...state, dispatch }}>

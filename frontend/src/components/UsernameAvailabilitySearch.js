@@ -2,20 +2,22 @@ import React from "react";
 import {
   Box,
   Button,
-  Typography,
   CircularProgress,
   TextField,
+  Typography,
   Alert,
 } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { useState } from "react";
 import useAvailabilityContext from "../hooks/useAvailabilityContext";
+import { isWhitelisted } from "validator";
 
 const UsernameAvailabilitySearch = () => {
-  const { searchActive, sseError, dispatch } = useAvailabilityContext();
+  const { searchActive, errors, dispatch } = useAvailabilityContext();
+  const { inputError, sseError } = errors;
   const [username, setUsername] = useState("");
 
-  const searchForUser = async (user) => {
+  const executeSearch = async (user) => {
     // use global state to define errors and success
     const sse = new EventSource(
       `https://username-availability-checker-backend.onrender.com/search/${user}`,
@@ -37,6 +39,17 @@ const UsernameAvailabilitySearch = () => {
     return () => sse.close();
   };
 
+  const searchForUser = async (user) => {
+    if (isWhitelisted(user, "^[A-Za-z0-9_]{1,15}$")) {
+      await executeSearch(user);
+    } else {
+      await dispatch({
+        type: "SET_INPUT_ERROR",
+        payload: "Search query contained illegal characters.",
+      });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch({ type: "SET_SEARCH_ACTIVE", payload: true });
@@ -55,12 +68,10 @@ const UsernameAvailabilitySearch = () => {
       alignItems="flex-start"
       gap={3}
     >
-      <Typography variant="h4" color="secondary">
-        Is your dream username available?
-      </Typography>
-
       <Box className="usernameInput" display="flex" gap={2} alignItems="center">
-        <label>Find out!</label>
+        <Typography variant="h5" color="secondary">
+          Find out!
+        </Typography>
         {/* the reason there is a value prop is so that later on, if the username textbox's value is modified from elsewhere e.g. using a clear button, then the state should update too*/}
         <TextField
           id="outlined-basic"
@@ -81,6 +92,7 @@ const UsernameAvailabilitySearch = () => {
           color="info"
           style={{ textTransform: "none" }}
           endIcon={<TwitterIcon />}
+          disabled={searchActive && true}
         >
           {" "}
           Submit{" "}
@@ -99,6 +111,12 @@ const UsernameAvailabilitySearch = () => {
           <Alert severity="error">
             An unknown error occurred while trying to search for your username.
             Please try again.
+          </Alert>
+        )}
+        {inputError && (
+          <Alert severity="error">
+            Your search query contained illegal characters or was longer than 15
+            characters. Please try again.
           </Alert>
         )}
       </Box>
