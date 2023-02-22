@@ -34,16 +34,23 @@ const generateErrorMessages = ({ login: username, error, message }) => {
 const searchTwitch = async (username) => {
   const { data, errors } = await obtainTwitchProfile(username);
   if (errors) {
-    return { twitchData: { ...generateErrorMessages(errors), status: 400 } };
+    return {
+      ...generateErrorMessages(errors),
+      status: 400,
+      type: "TWITCH_DATA",
+    };
   } else if (data && data.length > 0) {
     // if Twitch profile exists
-    return { twitchData: { ...generateErrorMessages(data[0]), status: 400 } };
+    return {
+      ...generateErrorMessages(data[0]),
+      status: 400,
+      type: "TWITCH_DATA",
+    };
   } else {
     return {
-      twitchData: {
-        msg: `The Twitch username ${username} is available!`,
-        status: 200,
-      },
+      msg: `The Twitch username ${username} is available!`,
+      status: 200,
+      type: "TWITCH_DATA",
     };
   }
 };

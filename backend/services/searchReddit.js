@@ -34,21 +34,21 @@ const searchReddit = async (username) => {
 
   if (errors) {
     return {
-      redditData: {
-        ...generateErrorMessages({ error: errors[0][1] }),
-        status: 400,
-      },
+      ...generateErrorMessages({ error: errors[0][1] }),
+      status: 400,
+      type: "REDDIT_DATA",
     };
   } else if (!data) {
     return {
-      redditData: { ...generateErrorMessages({ username }), status: 400 },
+      ...generateErrorMessages({ username }),
+      status: 400,
+      type: "REDDIT_DATA",
     };
   } else {
     return {
-      redditData: {
-        msg: `The Reddit username [${username}] is available!`,
-        status: 200,
-      },
+      msg: `The Reddit username [${username}] is available!`,
+      status: 200,
+      type: "REDDIT_DATA",
     };
   }
 };
