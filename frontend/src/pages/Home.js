@@ -1,16 +1,9 @@
 import { Grid } from "@mui/material";
-import { useState } from "react";
 // components
-import ProfileDetails from "../components/ProfileDetails";
-import ProfileForm from "../components/ProfileForm";
+import UsernameAvailabilityDetails from "../components/UsernameAvailabilityDetails";
+import UsernameAvailabilitySearch from "../components/UsernameAvailabilitySearch";
 
 const Home = () => {
-  const [profile, setProfile] = useState(null);
-
-  // update profile state variable when new profile is passed in
-  const handleProfileChange = (profile) => {
-    setProfile(profile);
-  };
   return (
     <Grid
       item
@@ -33,7 +26,7 @@ const Home = () => {
         justifyContent="flex-start"
         pr={1}
       >
-        <ProfileForm handleProfileChange={handleProfileChange} />
+        <UsernameAvailabilitySearch />
       </Grid>
 
       <Grid
@@ -43,7 +36,7 @@ const Home = () => {
         display="flex"
         sx={{ backgroundColor: "primary.alt" }}
       >
-        {profile && <ProfileDetails profile={profile} />}
+        <UsernameAvailabilityDetails />
       </Grid>
     </Grid>
   );

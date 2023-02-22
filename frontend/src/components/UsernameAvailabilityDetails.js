@@ -1,7 +1,14 @@
 import React from "react";
 import { Typography, Grid } from "@mui/material";
-import VerifiedIcon from "@mui/icons-material/Verified";
-const ProfileDetails = ({ profile }) => {
+import { useEffect } from "react";
+import useAvailabilityContext from "../hooks/useAvailabilityContext";
+
+const UsernameAvailabilityDetails = () => {
+  const { results } = useAvailabilityContext();
+  useEffect(() => {
+    let { twitterData, twitchData, tiktokData, redditData } = results;
+    console.log(twitterData, twitchData, tiktokData, redditData);
+  }, [results]);
   return (
     <Grid
       item
@@ -21,7 +28,7 @@ const ProfileDetails = ({ profile }) => {
         container
       >
         <Grid item>
-          <img src={profile.profile_image_url} alt="Profile" />
+          <img src="/" alt="Profile" />
         </Grid>
         <Grid
           item
@@ -31,9 +38,9 @@ const ProfileDetails = ({ profile }) => {
           gap={1}
         >
           <Typography variant="h5" color="secondary">
-            {profile.username}
+            Username placeholder
           </Typography>
-          <p>{profile.verified && <VerifiedIcon />}</p>
+          <p>Verified placeholder</p>
         </Grid>
       </Grid>
       <Grid
@@ -53,15 +60,13 @@ const ProfileDetails = ({ profile }) => {
           justifyContent="space-around"
           columnGap={2}
         >
-          <Typography variant="body1">Name: {profile.name}</Typography>
-          <Typography variant="body1">ID: {profile.id}</Typography>
+          <Typography variant="body1">Name: </Typography>
+          <Typography variant="body1">ID: </Typography>
         </Grid>
         <Grid item xs={12} display="flex" justifyContent="center" gap={1}>
           <Typography>Description:</Typography>
           <Typography variant="body3">
-            {profile.description.length > 1
-              ? profile.description
-              : "This user has not written a bio."}
+            This user has not written a bio."
           </Typography>
         </Grid>
       </Grid>
@@ -69,4 +74,4 @@ const ProfileDetails = ({ profile }) => {
   );
 };
 
-export default ProfileDetails;
+export default UsernameAvailabilityDetails;

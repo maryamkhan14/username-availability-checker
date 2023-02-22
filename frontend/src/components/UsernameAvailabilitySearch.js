@@ -1,61 +1,48 @@
 import React from "react";
 import {
   Box,
-  Alert,
   Button,
   Typography,
   CircularProgress,
   TextField,
+  Alert,
 } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useAvailabilityContext from "../hooks/useAvailabilityContext";
 
-const ProfileForm = ({ handleProfileChange }) => {
+const UsernameAvailabilitySearch = () => {
+  const { searchActive, sseError, dispatch } = useAvailabilityContext();
   const [username, setUsername] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const searchForUser = async (user) => {
-    // store result of fetch
-    const searchResult = await fetch(
-      `https://username-availability-checker-backend.onrender.com/search/${user}`
+    // use global state to define errors and success
+    const sse = new EventSource(
+      `https://username-availability-checker-backend.onrender.com/search/${user}`,
+      { withCredentials: false }
     );
+    sse.onmessage = async ({ data: result }) => {
+      await dispatch({
+        type: `SET_${JSON.parse(result).type}`,
+        payload: JSON.parse(result),
+      });
+    };
+    sse.onerror = async (e) => {
+      await dispatch({ type: "SET_SSE_ERROR", payload: e });
+      sse.close();
+    };
 
-    let { twitterData, twitchData, redditData, tiktokData } =
-      await searchResult.json();
-    console.log(twitterData);
-    console.log(twitchData);
-    console.log(redditData);
-    console.log(tiktokData);
-
-    // handle error in fetch result
-    if (!twitterSearchResult.ok) {
-      setError(twitterSearchResultJSON.errorMsg);
-      setLoading(false);
-    }
-
-    // handle successful fetch
-    if (twitterSearchResult.ok) {
-      // invoke prop function with profile data
-      handleProfileChange(twitterSearchResultJSON.profile);
-
-      // reset state variables
-      setUsername("");
-      setError(null);
-      setLoading(false);
-    }
+    // reset username
+    setUsername("");
+    return () => sse.close();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    await dispatch({ type: "SET_SEARCH_ACTIVE", payload: true });
     await searchForUser(username);
+    await dispatch({ type: "SET_SEARCH_INACTIVE", payload: false });
   };
-
-  // obtain profile for username "twitter" when page first loads
-  useEffect(() => {
-    searchForUser("twitter");
-  }, []);
 
   return (
     <Box
@@ -69,11 +56,11 @@ const ProfileForm = ({ handleProfileChange }) => {
       gap={3}
     >
       <Typography variant="h4" color="secondary">
-        Search for a Twitter profile.
+        Is your dream username available?
       </Typography>
 
       <Box className="usernameInput" display="flex" gap={2} alignItems="center">
-        <label>Enter a username:</label>
+        <label>Find out!</label>
         {/* the reason there is a value prop is so that later on, if the username textbox's value is modified from elsewhere e.g. using a clear button, then the state should update too*/}
         <TextField
           id="outlined-basic"
@@ -99,7 +86,7 @@ const ProfileForm = ({ handleProfileChange }) => {
           Submit{" "}
         </Button>
 
-        {loading && (
+        {searchActive && (
           <CircularProgress
             color="secondary"
             size="25px"
@@ -108,10 +95,15 @@ const ProfileForm = ({ handleProfileChange }) => {
         )}
       </Box>
       <Box className="error">
-        {error && <Alert severity="error">{error}</Alert>}
+        {sseError && (
+          <Alert severity="error">
+            An unknown error occurred while trying to search for your username.
+            Please try again.
+          </Alert>
+        )}
       </Box>
     </Box>
   );
 };
 
-export default ProfileForm;
+export default UsernameAvailabilitySearch;
