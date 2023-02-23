@@ -54,6 +54,6 @@ const searchProfilesController = async (req, res) => {
     redditSearch(req.params.username, res),
     twitchSearch(req.params.username, res),
     tiktokSearch(req.params.username, res),
-  ]).then(() => res.end());
+  ]).then(() => res.write("data: " + "end" + "\n\n"));
 };
 module.exports = { searchProfilesController };
