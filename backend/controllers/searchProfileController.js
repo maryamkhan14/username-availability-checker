@@ -25,7 +25,7 @@ const searchProfilesController = async (req, res) => {
     "Cache-Control": "no-cache",
   });
 
-  await Promises.allSettled([
+  await Promise.allSettled([
     twitterSearch(req.params.username)
       .then((result) => {
         res.write("data: " + JSON.stringify(result) + "\n\n");
