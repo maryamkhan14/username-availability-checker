@@ -3,17 +3,45 @@ const { searchTiktok } = require("../services/searchTiktok");
 const { searchTwitch } = require("../services/searchTwitch");
 const { searchReddit } = require("../services/searchReddit");
 
-const twitterSearch = (username) => {
-  return searchTwitter(username);
+const twitterSearch = (username, res) => {
+  searchTwitter(username)
+    .then((result) => {
+      res.write("data: " + JSON.stringify(result) + "\n\n");
+    })
+    .then(() => {
+      console.log("resolved");
+      resolve();
+    });
 };
-const redditSearch = (username) => {
-  return searchReddit(username);
+const redditSearch = (username, res) => {
+  searchReddit(username)
+    .then((result) => {
+      res.write("data: " + JSON.stringify(result) + "\n\n");
+    })
+    .then(() => {
+      console.log("resolved");
+      resolve();
+    });
 };
-const twitchSearch = (username) => {
-  return searchTwitch(username);
+const twitchSearch = (username, res) => {
+  searchTwitch(username)
+    .then((result) => {
+      res.write("data: " + JSON.stringify(result) + "\n\n");
+    })
+    .then(() => {
+      console.log("resolved");
+      resolve();
+    });
 };
-const tiktokSearch = (username) => {
-  return searchTiktok(username);
+const tiktokSearch = (username, res) => {
+  return searchTiktok(username)
+    .then((result) => {
+      res.write("data: " + JSON.stringify(result) + "\n\n");
+    })
+    .then(() => {
+      console.log("resolved");
+      resolve();
+    });
 };
 const searchProfilesController = async (req, res) => {
   res.writeHead(200, {
@@ -26,26 +54,10 @@ const searchProfilesController = async (req, res) => {
   });
 
   await Promise.allSettled([
-    twitterSearch(req.params.username)
-      .then((result) => {
-        res.write("data: " + JSON.stringify(result) + "\n\n");
-      })
-      .then(resolve()),
-    redditSearch(req.params.username)
-      .then((result) => {
-        res.write("data: " + JSON.stringify(result) + "\n\n");
-      })
-      .then(resolve()),
-    twitchSearch(req.params.username)
-      .then((result) => {
-        res.write("data: " + JSON.stringify(result) + "\n\n");
-      })
-      .then(resolve()),
-    tiktokSearch(req.params.username)
-      .then((result) => {
-        res.write("data: " + JSON.stringify(result) + "\n\n");
-      })
-      .then(resolve()),
+    twitterSearch(req.params.username, res),
+    redditSearch(req.params.username, res),
+    twitchSearch(req.params.username, res),
+    tiktokSearch(req.params.username, res),
   ]).then(() => res.end());
 };
 module.exports = { searchProfilesController };
