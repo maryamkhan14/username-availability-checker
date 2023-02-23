@@ -1,4 +1,4 @@
-const { searchAllNetworks } = "../services/searchAllNetworks";
+const { searchAllNetworks } = require("../services/searchAllNetworks");
 const searchProfilesController = async (req, res) => {
   await res.writeHead(200, {
     "Access-Control-Allow-Origin": "*",
