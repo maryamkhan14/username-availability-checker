@@ -29,8 +29,6 @@ const searchAllNetworks = async (res, username) => {
     redditSearch(res, username),
     twitchSearch(res, username),
     tiktokSearch(res, username),
-  ]);
-
-  await res.end();
+  ]).then(() => res.end());
 };
 module.exports = { searchAllNetworks };
