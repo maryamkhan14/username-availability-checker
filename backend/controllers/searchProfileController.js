@@ -10,7 +10,6 @@ const twitterSearch = (username, res) => {
     })
     .then(() => {
       console.log("resolved");
-      resolve();
     });
 };
 const redditSearch = (username, res) => {
@@ -20,7 +19,6 @@ const redditSearch = (username, res) => {
     })
     .then(() => {
       console.log("resolved");
-      resolve();
     });
 };
 const twitchSearch = (username, res) => {
@@ -30,7 +28,6 @@ const twitchSearch = (username, res) => {
     })
     .then(() => {
       console.log("resolved");
-      resolve();
     });
 };
 const tiktokSearch = (username, res) => {
@@ -40,7 +37,6 @@ const tiktokSearch = (username, res) => {
     })
     .then(() => {
       console.log("resolved");
-      resolve();
     });
 };
 const searchProfilesController = async (req, res) => {
