@@ -24,12 +24,12 @@ const tiktokSearch = (username) => {
 };
 
 const searchAllNetworks = async (res, username) => {
-  await Promise.allSettled(
+  await Promise.allSettled([
     twitterSearch(username),
     redditSearch(username),
     twitchSearch(username),
-    tiktokSearch(username)
-  );
+    tiktokSearch(username),
+  ]);
 
   await res.end();
 };
