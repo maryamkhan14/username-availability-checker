@@ -10,6 +10,5 @@ const searchProfilesController = async (req, res) => {
   });
 
   await searchAllNetworks(res, req.params.username);
-  await res.end();
 };
 module.exports = { searchProfilesController };
