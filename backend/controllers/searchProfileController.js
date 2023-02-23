@@ -46,6 +46,6 @@ const searchProfilesController = async (req, res) => {
         res.write("data: " + JSON.stringify(result) + "\n\n");
       })
       .then(resolve()),
-  ]);
+  ]).then(() => res.end());
 };
 module.exports = { searchProfilesController };
