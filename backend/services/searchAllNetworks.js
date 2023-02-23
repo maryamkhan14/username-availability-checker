@@ -2,22 +2,22 @@ const { searchTwitter } = require("./searchTwitter");
 const { searchTwitch } = require("./searchTwitch");
 const { searchReddit } = require("./searchReddit");
 const { searchTiktok } = require("./searchTiktok");
-const twitterSearch = (username) => {
+const twitterSearch = (res, username) => {
   searchTwitter(username).then((result) => {
     res.write("data: " + JSON.stringify(result) + "\n\n");
   });
 };
-const redditSearch = (username) => {
+const redditSearch = (res, username) => {
   searchReddit(username).then((result) => {
     res.write("data: " + JSON.stringify(result) + "\n\n");
   });
 };
-const twitchSearch = (username) => {
+const twitchSearch = (res, username) => {
   searchTwitch(username).then((result) => {
     res.write("data: " + JSON.stringify(result) + "\n\n");
   });
 };
-const tiktokSearch = (username) => {
+const tiktokSearch = (res, username) => {
   searchTiktok(username).then((result) => {
     res.write("data: " + JSON.stringify(result) + "\n\n");
   });
@@ -25,10 +25,10 @@ const tiktokSearch = (username) => {
 
 const searchAllNetworks = async (res, username) => {
   await Promise.allSettled([
-    twitterSearch(username),
-    redditSearch(username),
-    twitchSearch(username),
-    tiktokSearch(username),
+    twitterSearch(res, username),
+    redditSearch(res, username),
+    twitchSearch(res, username),
+    tiktokSearch(res, username),
   ]);
 
   await res.end();
