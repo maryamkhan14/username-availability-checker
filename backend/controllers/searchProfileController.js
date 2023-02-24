@@ -1,44 +1,5 @@
-const { searchTwitter } = require("../services/searchTwitter");
-const { searchTiktok } = require("../services/searchTiktok");
-const { searchTwitch } = require("../services/searchTwitch");
-const { searchReddit } = require("../services/searchReddit");
+const { searchAllNetworks } = require("../services/searchAllNetworks");
 
-const twitterSearch = (username, res) => {
-  searchTwitter(username)
-    .then((result) => {
-      res.write("data: " + JSON.stringify(result) + "\n\n");
-    })
-    .then(() => {
-      console.log("resolved");
-    });
-};
-const redditSearch = (username, res) => {
-  searchReddit(username)
-    .then((result) => {
-      res.write("data: " + JSON.stringify(result) + "\n\n");
-    })
-    .then(() => {
-      console.log("resolved");
-    });
-};
-const twitchSearch = (username, res) => {
-  searchTwitch(username)
-    .then((result) => {
-      res.write("data: " + JSON.stringify(result) + "\n\n");
-    })
-    .then(() => {
-      console.log("resolved");
-    });
-};
-const tiktokSearch = (username, res) => {
-  return searchTiktok(username)
-    .then((result) => {
-      res.write("data: " + JSON.stringify(result) + "\n\n");
-    })
-    .then(() => {
-      console.log("resolved");
-    });
-};
 const searchProfilesController = async (req, res) => {
   res.writeHead(200, {
     "Access-Control-Allow-Origin": "*",
@@ -48,12 +9,6 @@ const searchProfilesController = async (req, res) => {
     Connection: "keep-alive",
     "Cache-Control": "no-cache",
   });
-
-  await Promise.allSettled([
-    twitterSearch(req.params.username, res),
-    redditSearch(req.params.username, res),
-    twitchSearch(req.params.username, res),
-    tiktokSearch(req.params.username, res),
-  ]).then(() => res.write("data: " + JSON.stringify({ end: "end" }) + "\n\n"));
+  await searchAllNetworks(res, req.params.username);
 };
 module.exports = { searchProfilesController };
