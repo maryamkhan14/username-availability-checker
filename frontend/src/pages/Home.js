@@ -20,8 +20,8 @@ const Home = () => {
     >
       <Grid
         item
-        lg={8}
-        className="profileForm"
+        lg={4}
+        className="username-availability-search"
         display="flex"
         justifyContent="flex-start"
         pr={1}
@@ -29,13 +29,7 @@ const Home = () => {
         <UsernameAvailabilitySearch />
       </Grid>
 
-      <Grid
-        item
-        lg={4}
-        className="profileDetails"
-        display="flex"
-        sx={{ backgroundColor: "primary.alt" }}
-      >
+      <Grid item lg={8} display="flex" sx={{ backgroundColor: "primary.alt" }}>
         <UsernameAvailabilityDetails />
       </Grid>
     </Grid>

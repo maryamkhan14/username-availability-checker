@@ -1,0 +1,9 @@
+.username-availability-details {
+  display: flex;
+  justify-content: space-between;
+}
+.network-result {
+  display: flex;
+  flex: 1 0 49%;
+  border-radius: 5%;
+}
