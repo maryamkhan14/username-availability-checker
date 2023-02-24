@@ -8,10 +8,9 @@ const UsernameAvailabilityDetails = () => {
   const { results } = useAvailabilityContext();
   return (
     <Grid item container className="username-availability-details" gap={1}>
-      {results &&
-        Object.values(results).map((result) => {
-          return <NetworkResult result={result} key={result.type} />;
-        })}
+      {Object.values(results).map((result) => {
+        return <NetworkResult result={result} key={result.type} />;
+      })}
     </Grid>
   );
 };
