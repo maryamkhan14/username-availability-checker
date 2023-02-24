@@ -13,14 +13,14 @@ const Footer = () => {
         gap={2}
       >
         <Grid item id="creation-info">
-          <Alert variant="outlined" severity="info" icon={false}>
+          <Alert color="info" icon={false}>
             Created with Express and React.
           </Alert>
         </Grid>
         <Grid item id="github-profile">
           <IconButton aria-label="github" size="large">
             <Link href="https://github.com/maryamkhan14">
-              <GitHubIcon color="info" fontSize="large" />
+              <GitHubIcon color="primary.main" fontSize="large" />
             </Link>
           </IconButton>
         </Grid>

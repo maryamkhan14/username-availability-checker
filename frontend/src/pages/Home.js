@@ -8,28 +8,28 @@ const Home = () => {
     <Grid
       item
       className="home"
-      width="80vw"
+      width="85vw"
       height="100%"
       display="flex"
       flexDirection="row"
       justifySelf="center"
       justifyContent="space-between"
-      p={3}
       sx={{ backgroundColor: "primary.main" }}
+      p={3}
       container
     >
       <Grid
         item
-        lg={4}
+        lg={5}
         className="username-availability-search"
         display="flex"
         justifyContent="flex-start"
-        pr={1}
+        pr={3}
       >
         <UsernameAvailabilitySearch />
       </Grid>
 
-      <Grid item lg={8} display="flex" sx={{ backgroundColor: "primary.alt" }}>
+      <Grid item lg={6} display="flex" sx={{ backgroundColor: "primary.alt" }}>
         <UsernameAvailabilityDetails />
       </Grid>
     </Grid>
