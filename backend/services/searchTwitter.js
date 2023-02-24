@@ -21,11 +21,11 @@ const generateErrorMessages = (error) => {
   return error.message
     ? {
         // AxiosError objects' error message property is called message
-        msg: `Error: ${error.message}.`,
+        msg: `${error.message}.`,
       }
     : {
         // Twitter API error results do not have that array, and their message property is called detail
-        msg: `Error: ${error.detail}.`,
+        msg: `${error.detail}.`,
       };
 };
 const searchTwitter = async (username) => {
@@ -35,20 +35,23 @@ const searchTwitter = async (username) => {
       msg: `The Twitter username [${username}] is available!`,
       status: 200,
       type: "TWITTER_DATA",
+      username: username,
     };
   } else if (errors) {
     return {
       ...generateErrorMessages(errors[0]),
       status: 400,
       type: "TWITTER_DATA",
+      username: username,
     };
   } else if (data) {
     return {
       ...generateErrorMessages({
-        detail: `The Twitter username [${username}] is taken. `,
+        detail: `The Twitter username [${username}] is taken`,
       }),
       status: 400,
       type: "TWITTER_DATA",
+      username: username,
     };
   }
 };

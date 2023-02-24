@@ -46,7 +46,7 @@ const generateErrorMessages = (scrapeError, username) => {
       }
     : {
         // Twitch username already exists
-        msg: `Error: The Tiktok username [${username}] is taken.`,
+        msg: `The Tiktok username [${username}] is taken.`,
       };
 };
 
@@ -58,18 +58,21 @@ const obtainTiktokProfile = async (username) => {
       ...generateErrorMessages(true, username),
       status: 400,
       type: "TIKTOK_DATA",
+      username: username,
     };
   } else if (!userAvailable) {
     return {
       ...generateErrorMessages(false, username),
       status: 400,
       type: "TIKTOK_DATA",
+      username: username,
     };
   } else {
     return {
       msg: `The Tiktok username [${username}] is available!`,
       status: 200,
       type: "TIKTOK_DATA",
+      username: username,
     };
   }
 };

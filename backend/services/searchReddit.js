@@ -23,10 +23,10 @@ const obtainRedditProfile = async (username) => {
 const generateErrorMessages = ({ error, username }) => {
   return error
     ? {
-        msg: `Error: ${error}. Try again.`,
+        msg: `${error}. Try again.`,
       }
     : {
-        msg: `Error: The Reddit username [${username}] is taken.`,
+        msg: `The Reddit username [${username}] is taken.`,
       };
 };
 const searchReddit = async (username) => {
@@ -37,18 +37,21 @@ const searchReddit = async (username) => {
       ...generateErrorMessages({ error: errors[0][1] }),
       status: 400,
       type: "REDDIT_DATA",
+      username: username,
     };
   } else if (!data) {
     return {
       ...generateErrorMessages({ username }),
       status: 400,
       type: "REDDIT_DATA",
+      username: username,
     };
   } else {
     return {
       msg: `The Reddit username [${username}] is available!`,
       status: 200,
       type: "REDDIT_DATA",
+      username: username,
     };
   }
 };
