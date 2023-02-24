@@ -7,7 +7,6 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import { useState } from "react";
 import useAvailabilityContext from "../hooks/useAvailabilityContext";
 
@@ -51,6 +50,7 @@ const UsernameAvailabilitySearch = () => {
         type: "SET_INPUT_ERROR",
         payload: "Search query contained illegal characters.",
       });
+      await dispatch({ type: "SET_ACTIVE_SEARCH", payload: false });
     }
   };
 
@@ -63,7 +63,7 @@ const UsernameAvailabilitySearch = () => {
   return (
     <Box
       component="form"
-      className="searchProfile"
+      className="usernameSearchForm"
       onSubmit={handleSubmit}
       display="flex"
       flexDirection="column"
@@ -71,34 +71,33 @@ const UsernameAvailabilitySearch = () => {
       alignItems="flex-start"
       gap={3}
     >
-      <Box className="usernameInput" display="flex" gap={2} alignItems="center">
-        <Typography variant="h5" color="secondary">
-          Find out!
+      <Box className="user-prompt" display="flex" gap={2} alignItems="center">
+        <Typography variant="h4" color="secondary">
+          Find out! 🚀
         </Typography>
-        {/* the reason there is a value prop is so that later on, if the username textbox's value is modified from elsewhere e.g. using a clear button, then the state should update too*/}
+      </Box>
+      <Box className="user-input" display="flex" width="100%" gap={2}>
         <TextField
           id="outlined-basic"
           variant="outlined"
           color="info"
           size="small"
           type="text"
+          sx={{ input: { color: "text.secondary" } }}
+          fullWidth
           onChange={(e) => setUsername(e.target.value)}
           value={username}
           required={true}
         />
-      </Box>
-
-      <Box className="usernameSubmit" display="flex" gap={2}>
         <Button
           type="submit"
           variant="contained"
           color="info"
           style={{ textTransform: "none" }}
-          endIcon={<TwitterIcon />}
           disabled={searchActive && true}
         >
           {" "}
-          Submit{" "}
+          Search!{" "}
         </Button>
         {searchActive === true && (
           <CircularProgress
@@ -108,20 +107,29 @@ const UsernameAvailabilitySearch = () => {
           />
         )}
       </Box>
-      <Box className="error">
-        {sseError && (
-          <Alert severity="error">
-            An unknown error occurred while trying to search for your username.
-            Please try again.
-          </Alert>
-        )}
-        {inputError && (
-          <Alert severity="error">
-            Your search query contained illegal characters or was longer than 15
-            characters. Please try again.
-          </Alert>
-        )}
+
+      <Box className="info-availability">
+        <Alert severity="info" icon={false}>
+          This tool currently searches Twitter, Reddit, Twitch, and TikTok.
+          Instagram and YouTube searches coming soon!
+        </Alert>
       </Box>
+      {errors && (
+        <Box className="error">
+          {sseError && (
+            <Alert severity="error">
+              An unknown error occurred while trying to search for your
+              username. Please try again.
+            </Alert>
+          )}
+          {inputError && (
+            <Alert severity="error">
+              Your search query contained illegal characters or was longer than
+              15 characters. Please try again.
+            </Alert>
+          )}
+        </Box>
+      )}
     </Box>
   );
 };
