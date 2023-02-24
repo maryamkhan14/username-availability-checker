@@ -10,7 +10,6 @@ import {
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { useState } from "react";
 import useAvailabilityContext from "../hooks/useAvailabilityContext";
-import { isWhitelisted } from "validator";
 
 const UsernameAvailabilitySearch = () => {
   const { searchActive, errors, dispatch } = useAvailabilityContext();
@@ -24,23 +23,28 @@ const UsernameAvailabilitySearch = () => {
       { withCredentials: false }
     );
     sse.onmessage = async ({ data: result }) => {
-      await dispatch({
-        type: `SET_${JSON.parse(result).type}`,
-        payload: JSON.parse(result),
-      });
+      if (JSON.parse(result).end) {
+        await dispatch({ type: "SET_ACTIVE_SEARCH", payload: false });
+      } else {
+        await dispatch({
+          type: `SET_${JSON.parse(result).type}`,
+          payload: JSON.parse(result),
+        });
+      }
     };
     sse.onerror = async (e) => {
       await dispatch({ type: "SET_SSE_ERROR", payload: e });
       sse.close();
     };
-
     // reset username
     setUsername("");
-    return () => sse.close();
+    return () => {
+      sse.close();
+    };
   };
 
   const searchForUser = async (user) => {
-    if (isWhitelisted(user, "^[A-Za-z0-9_]{1,15}$")) {
+    if (/^[A-Za-z0-9_]{1,15}$/.test(user)) {
       await executeSearch(user);
     } else {
       await dispatch({
@@ -52,9 +56,8 @@ const UsernameAvailabilitySearch = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch({ type: "SET_SEARCH_ACTIVE", payload: true });
+    await dispatch({ type: "SET_ACTIVE_SEARCH", payload: true });
     await searchForUser(username);
-    await dispatch({ type: "SET_SEARCH_INACTIVE", payload: false });
   };
 
   return (
@@ -97,8 +100,7 @@ const UsernameAvailabilitySearch = () => {
           {" "}
           Submit{" "}
         </Button>
-
-        {searchActive && (
+        {searchActive === true && (
           <CircularProgress
             color="secondary"
             size="25px"

@@ -34,9 +34,7 @@ export const usernameAvailabilityReducer = (state, action) => {
         ...state,
         errors: { ...state.errors, inputError: action.payload },
       };
-    case "SET_SEARCH_ACTIVE":
-      return { ...state, searchActive: action.payload };
-    case "SET_SEARCH_INACTIVE":
+    case "SET_ACTIVE_SEARCH":
       return { ...state, searchActive: action.payload };
     default:
       return state;
