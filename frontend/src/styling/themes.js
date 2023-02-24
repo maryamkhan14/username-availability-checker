@@ -4,18 +4,19 @@ const themeGlobal = createTheme({
   stretch: { height: "100%" },
   palette: {
     background: {
-      default: "#DEDEDE",
+      default: "#F0F0F0",
     },
     primary: {
       main: "#fff",
       alt: "#F0F0F0",
-      twitter: blue[100],
-      reddit: orange[200],
+      card: "#DEDEDE",
+      twitter: blue[200],
+      reddit: orange[300],
       twitch: deepPurple[200],
-      tiktok: pink[100],
+      tiktok: pink[200],
     },
     text: {
-      primary: "#173A5E",
+      primary: "#F0F0F0",
       secondary: "#46505A",
     },
     action: {
@@ -33,6 +34,10 @@ const themeGlobal = createTheme({
       styleOverrides: {
         body: {
           height: "100%",
+          background:
+            "linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('bg.jpg')",
+
+          backgroundSize: "contain",
         },
         html: { height: "100%" },
         "@font-face": [
