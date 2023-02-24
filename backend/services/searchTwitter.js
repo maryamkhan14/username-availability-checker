@@ -25,7 +25,7 @@ const generateErrorMessages = (error) => {
       }
     : {
         // Twitter API error results do not have that array, and their message property is called detail
-        msg: `${error.detail}.`,
+        msg: `Twitter: ${error.detail}`,
       };
 };
 const searchTwitter = async (username) => {
@@ -47,7 +47,7 @@ const searchTwitter = async (username) => {
   } else if (data) {
     return {
       ...generateErrorMessages({
-        detail: `The Twitter username [${username}] is taken`,
+        detail: `Username [${username}] is taken.`,
       }),
       status: 400,
       type: "TWITTER_DATA",
