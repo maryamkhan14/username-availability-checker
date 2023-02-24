@@ -5,5 +5,20 @@
 .network-result {
   display: flex;
   flex: 1 0 49%;
-  border-radius: 5%;
+}
+.network-result .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.network-result .details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.network-result .details > * {
+  text-align: center;
 }
