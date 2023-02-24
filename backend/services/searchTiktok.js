@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer");
 const path = require("path");
 const BASE_URL = "https://www.tiktok.com/";
+
 const scrapeTiktok = async (searchURL) => {
   let userAvailable = false;
   let errors = null;

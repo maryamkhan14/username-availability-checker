@@ -11,9 +11,10 @@ const obtainTwitterProfile = async (username) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    // return object contained inside data property
+    // return object contained inside data property (will contain user details if matching user is found, errors object otherwise)
     return { ...data };
   } catch (e) {
+    // catch Axios errors
     return { errors: e.response.data.errors };
   }
 };

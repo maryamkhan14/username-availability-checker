@@ -29,8 +29,10 @@ const generateErrorMessages = ({ error, username }) => {
         msg: `The Reddit username [${username}] is taken.`,
       };
 };
+
 const searchReddit = async (username) => {
-  const { data, errors } = await obtainRedditProfile(username);
+  // Reddit's API returns "true" in data object if username is available, false otherwise
+  const { data: userAvailable, errors } = await obtainRedditProfile(username);
 
   if (errors) {
     return {
@@ -39,7 +41,7 @@ const searchReddit = async (username) => {
       type: "REDDIT_DATA",
       username: username,
     };
-  } else if (!data) {
+  } else if (!userAvailable) {
     return {
       ...generateErrorMessages({ username }),
       status: 400,

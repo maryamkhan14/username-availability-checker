@@ -13,7 +13,7 @@ const obtainTwitchProfile = async (username) => {
       },
     });
 
-    // return object contained inside data property
+    // return object contained inside data property (will be empty if no matching user is found)
     return { ...data };
   } catch (e) {
     return { errors: e.response.data.errors };
@@ -32,7 +32,9 @@ const generateErrorMessages = ({ login: username, error, message }) => {
       };
 };
 const searchTwitch = async (username) => {
+  // Twitch API returns profile data in data object if user already exists, empty object if not
   const { data, errors } = await obtainTwitchProfile(username);
+
   if (errors) {
     return {
       ...generateErrorMessages(errors),
