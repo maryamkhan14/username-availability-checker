@@ -9,10 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Grid item xs={12} container display="flex" gap={3}>
-        <Grid item xs={12} container display="flex"></Grid>
-        <Grid item xs={12} container display="flex">
-          <Navbar />
-        </Grid>
+        <Navbar />
         <Grid
           item
           xs={12}
@@ -35,8 +32,6 @@ function App() {
         >
           <Footer />
         </Grid>
-
-        <Grid item xs={12} container display="flex"></Grid>
       </Grid>
     </BrowserRouter>
   );

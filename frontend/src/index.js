@@ -11,6 +11,7 @@ root.render(
       <CssBaseline />
       <Grid
         container
+        className="app-container"
         height="100vh"
         display="flex"
         flexDirection="column"

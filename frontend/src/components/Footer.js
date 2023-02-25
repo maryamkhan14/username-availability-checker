@@ -4,7 +4,14 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 const Footer = () => {
   return (
-    <Grid item id="footer" display="flex" alignItems="flex-start">
+    <Grid
+      item
+      id="footer"
+      display="flex"
+      alignItems="flex-start"
+      justifyContent="center"
+      container
+    >
       <Grid
         item
         id="creation-and-social"

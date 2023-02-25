@@ -9,7 +9,6 @@ const Home = () => {
       item
       className="home"
       width="85vw"
-      height="100%"
       display="flex"
       flexDirection="row"
       justifySelf="center"
