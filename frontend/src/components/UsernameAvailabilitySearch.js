@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  Paper,
   Button,
   CircularProgress,
   TextField,
@@ -64,74 +65,85 @@ const UsernameAvailabilitySearch = () => {
 
   return (
     <Box
-      component="form"
-      className="usernameSearchForm"
-      onSubmit={handleSubmit}
+      component={Paper}
+      className="username-search-form wrapper"
       display="flex"
       flexDirection="column"
       justifyContent="center"
-      alignItems="flex-start"
-      gap={3}
+      flex="1 1 100%"
+      elevation={2}
     >
-      <Box className="user-prompt" display="flex" gap={2} alignItems="center">
-        <Typography variant="h4" color="secondary">
-          Find out! 🚀
-        </Typography>
-      </Box>
-      <Box className="user-input" display="flex" width="100%" gap={2}>
-        <TextField
-          id="outlined-basic"
-          variant="outlined"
-          color="info"
-          size="small"
-          type="text"
-          sx={{ input: { color: "text.secondary" } }}
-          fullWidth
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-          required={true}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="info"
-          style={{ textTransform: "none" }}
-          disabled={searchActive && true}
-        >
-          {" "}
-          Search!{" "}
-        </Button>
-        {searchActive === true && (
-          <CircularProgress
-            color="secondary"
-            size="25px"
-            style={{ alignSelf: "center" }}
+      <Box
+        component="form"
+        className="username-search-form"
+        onSubmit={handleSubmit}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="flex-start"
+        gap={3}
+        p={3}
+      >
+        <Box className="user-prompt" display="flex" gap={2} alignItems="center">
+          <Typography variant="h4" color="secondary">
+            Find out! 🚀
+          </Typography>
+        </Box>
+        <Box className="user-input" display="flex" width="100%" gap={2}>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            color="info"
+            size="small"
+            type="text"
+            sx={{ input: { color: "text.secondary" } }}
+            fullWidth
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            required={true}
           />
-        )}
-      </Box>
-
-      <Box className="info-availability">
-        <Alert severity="info" icon={false}>
-          This tool currently searches Twitter, Reddit, Twitch, and TikTok.
-          Instagram and YouTube searches coming soon!
-        </Alert>
-      </Box>
-      {errors && (
-        <Box className="error">
-          {sseError && (
-            <Alert severity="error">
-              An unknown error occurred while trying to search for your
-              username. Please try again.
-            </Alert>
-          )}
-          {inputError && (
-            <Alert severity="error">
-              Your search query contained illegal characters or was longer than
-              15 characters. Please try again.
-            </Alert>
+          <Button
+            type="submit"
+            variant="contained"
+            color="info"
+            style={{ textTransform: "none" }}
+            disabled={searchActive && true}
+          >
+            {" "}
+            Search!{" "}
+          </Button>
+          {searchActive === true && (
+            <CircularProgress
+              color="secondary"
+              size="25px"
+              style={{ alignSelf: "center" }}
+            />
           )}
         </Box>
-      )}
+
+        <Box className="info-availability">
+          <Alert severity="info" icon={false}>
+            This tool currently searches Twitter, Reddit, Twitch, and TikTok.
+            Instagram and YouTube searches coming soon!
+          </Alert>
+        </Box>
+        {errors && (
+          <Box className="error">
+            {sseError && (
+              <Alert severity="error">
+                An unknown error occurred while trying to search for your
+                username. Please try again.
+              </Alert>
+            )}
+            {inputError && (
+              <Alert severity="error">
+                Your search query contained illegal characters or was longer
+                than 15 characters. Please try again.
+              </Alert>
+            )}
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };

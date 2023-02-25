@@ -14,22 +14,22 @@ const Home = () => {
       flexDirection="row"
       justifySelf="center"
       justifyContent="space-between"
-      sx={{ backgroundColor: "primary.main" }}
-      p={3}
+      columnSpacing={3}
       container
     >
       <Grid
         item
-        lg={5}
+        lg={7}
         className="username-availability-search"
         display="flex"
+        flexDirection="column"
+        alignItems="center"
         justifyContent="flex-start"
-        pr={3}
       >
         <UsernameAvailabilitySearch />
       </Grid>
 
-      <Grid item lg={6} display="flex" sx={{ backgroundColor: "primary.alt" }}>
+      <Grid item lg={5} display="flex">
         <UsernameAvailabilityDetails />
       </Grid>
     </Grid>

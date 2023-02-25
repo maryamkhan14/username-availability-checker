@@ -10,8 +10,8 @@ const themeGlobal = createTheme({
       main: "#fff",
       alt: "#F0F0F0",
       card: "#DEDEDE",
-      twitter: blue[200],
-      reddit: orange[300],
+      twitter: blue[300],
+      reddit: orange[700],
       twitch: deepPurple[200],
       tiktok: pink[200],
     },
@@ -36,8 +36,8 @@ const themeGlobal = createTheme({
           height: "100%",
           background:
             "linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('bg.jpg')",
-
-          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
         },
         html: { height: "100%" },
         "@font-face": [
