@@ -14,9 +14,7 @@ const twitterSearch = (username, res) => {
 const redditSearch = (username, res) => {
   searchReddit(username)
     .then((result) => {
-      res
-        .write("data: " + JSON.stringify(result) + "\n\n")
-        .then(() => console.log("resolved"));
+      res.write("data: " + JSON.stringify(result) + "\n\n");
     })
     .then(() => console.log("resolved"));
 };
