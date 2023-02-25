@@ -14,6 +14,7 @@ const Home = () => {
       flexDirection="row"
       justifySelf="center"
       justifyContent="space-between"
+      rowSpacing={3}
       columnSpacing={3}
       container
     >
