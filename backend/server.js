@@ -9,20 +9,19 @@ const app = express();
 app.use(cors());
 app.options("*", cors());
 const puppeteerCache = null;
+createBrowserAndPage().then((browserAndPage) => {
+  puppeteerCache = browserAndPage;
+});
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader("Access-Control-Max-Age", "86400"); // 24 hours
-  createBrowserAndPage().then((browserAndPage) => {
-    if (!puppeteerCache) {
-      puppeteerCache = browserAndPage;
-    }
-    req.browser = puppeteerCache.browser;
-    req.page = puppeteerCache.page;
-    console.log(page);
-  });
+
+  req.browser = puppeteerCache.browser;
+  req.page = puppeteerCache.page;
+  console.log(req.page);
 
   next();
 });
