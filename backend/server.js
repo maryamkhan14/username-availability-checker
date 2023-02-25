@@ -5,8 +5,6 @@ const cors = require("cors");
 const searchProfileRoutes = require("./routes/searchProfiles");
 const { createBrowserAndPage } = require("./services/crawlTiktok");
 
-let { browser, page } = await createBrowserAndPage();
-
 const app = express();
 
 app.use(cors());
@@ -17,8 +15,11 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader("Access-Control-Max-Age", "86400"); // 24 hours
-  req.browser = browser;
-  req.page = page;
+  createBrowserAndPage().then(({ browser, page }) => {
+    req.browser = browser;
+    req.page = page;
+  });
+
   next();
 });
 
