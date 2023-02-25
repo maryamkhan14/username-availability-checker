@@ -28,11 +28,25 @@ export const usernameAvailabilityReducer = (state, action) => {
         ...state,
         errors: { ...state.errors, sseError: action.payload },
       };
-
     case "SET_INPUT_ERROR":
       return {
         ...state,
         errors: { ...state.errors, inputError: action.payload },
+      };
+    case "RESET_ERRORS":
+      return {
+        ...state,
+        errors: {},
+      };
+    case "RESET_RESULTS":
+      return {
+        ...state,
+        results: {
+          twitterData: { type: "TWITTER_DATA" },
+          twitchData: { type: "TWITCH_DATA" },
+          tiktokData: { type: "TIKTOK_DATA" },
+          redditData: { type: "REDDIT_DATA" },
+        },
       };
     case "SET_ACTIVE_SEARCH":
       return { ...state, searchActive: action.payload };

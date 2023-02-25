@@ -57,6 +57,8 @@ const UsernameAvailabilitySearch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch({ type: "SET_ACTIVE_SEARCH", payload: true });
+    await dispatch({ type: "RESET_ERRORS", payload: null });
+    await dispatch({ type: "RESET_RESULTS", payload: null });
     await searchForUser(username);
   };
 
