@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <BrowserRouter>
-      <Grid item xs={12} container display="flex" gap={3}>
+      <Grid item xs={12} container p={3} rowSpacing={4}>
         <Grid
           item
           xs={12}

@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import App from "./App";
 import themeGlobal from "./styling/themes";
 import { ThemeProvider, CssBaseline, Grid } from "@mui/material";
@@ -10,6 +10,7 @@ root.render(
     <ThemeProvider theme={themeGlobal}>
       <CssBaseline />
       <Grid
+        item
         container
         className="app-container"
         display="flex"

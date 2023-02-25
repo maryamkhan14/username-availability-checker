@@ -9,6 +9,7 @@ const Footer = () => {
       id="footer"
       display="flex"
       alignItems="flex-start"
+      pb={2}
       justifyContent="center"
       container
     >

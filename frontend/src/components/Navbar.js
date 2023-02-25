@@ -6,8 +6,9 @@ const Navbar = () => {
       className="navbarBox"
       xs={12}
       display="flex"
-      flexDirection="column-reverse"
-      justifyContent="flex-start"
+      flexDirection="column"
+      justifyContent="flex-end"
+      pt={2}
       alignItems="center"
       textAlign="center"
       container
