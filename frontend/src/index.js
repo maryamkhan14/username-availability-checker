@@ -12,8 +12,8 @@ root.render(
       <Grid
         container
         className="app-container"
-        height="100vh"
         display="flex"
+        flex="1 0 100%"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"

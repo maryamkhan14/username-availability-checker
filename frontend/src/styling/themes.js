@@ -33,10 +33,10 @@ const themeGlobal = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
+          display: "flex",
           height: "100%",
           background:
             "linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('bg.jpg')",
-          backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         },
         html: { height: "100%" },
