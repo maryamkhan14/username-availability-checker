@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useAvailabilityContext from "../hooks/useAvailabilityContext";
 import NetworkResult from "./NetworkResult";
 import { Grid } from "@mui/material";

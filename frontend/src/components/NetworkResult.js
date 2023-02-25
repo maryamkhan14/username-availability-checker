@@ -16,7 +16,7 @@ const NetworkResult = ({ result }) => {
           className="network-result card"
         >
           <Grid item container className="network-result details" gap={1}>
-            {(result.status == 200 && (
+            {(result.status === 200 && (
               <CheckCircleOutlineIcon fontSize="large" />
             )) || <CancelOutlinedIcon fontSize="large" />}
             <Typography variant="h7" className="result-message">
