@@ -3,6 +3,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const searchProfileRoutes = require("./routes/searchProfiles");
+const { createBrowserAndPage } = require("./services/crawlTiktok");
+
+let { browser, page } = await createBrowserAndPage();
 
 const app = express();
 
@@ -14,6 +17,8 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader("Access-Control-Max-Age", "86400"); // 24 hours
+  req.browser = browser;
+  req.page = page;
   next();
 });
 
@@ -22,6 +27,7 @@ app.use(express.json());
 app.use("/search", searchProfileRoutes);
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Listening on port ${PORT}`);
+  console.log("Created a browser and page");
 });

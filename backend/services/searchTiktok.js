@@ -2,25 +2,9 @@ const puppeteer = require("puppeteer");
 const path = require("path");
 const BASE_URL = "https://www.tiktok.com/";
 
-const scrapeTiktok = async (searchURL) => {
+const scrapeTiktok = async (searchURL, page) => {
   let userAvailable = false;
   let errors = null;
-  const userDataDirPath = path.join(__dirname, "/data");
-  const browser = await puppeteer.launch({
-    headless: true,
-    userDataDir: `${userDataDirPath}`,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
-
-  const page = await browser.newPage();
-  // turns request interceptor on
-  await page.setRequestInterception(true);
-
-  page.on("request", (request) => {
-    // cancel requests of unnecessary resource types (CSS, images, etc)
-    if (request.resourceType() !== "document") request.abort();
-    else request.continue();
-  });
 
   page.on("response", (response) => {
     // 200 status code is returned when existing profile is found
@@ -32,9 +16,6 @@ const scrapeTiktok = async (searchURL) => {
   } catch (error) {
     errors = { error };
   }
-
-  await page.close();
-  await browser.close();
 
   return { errors, userAvailable };
 };
@@ -51,8 +32,11 @@ const generateErrorMessages = (scrapeError, username) => {
       };
 };
 
-const obtainTiktokProfile = async (username) => {
-  let { errors, userAvailable } = await scrapeTiktok(`${BASE_URL}@${username}`);
+const obtainTiktokProfile = async (username, page) => {
+  let { errors, userAvailable } = await scrapeTiktok(
+    `${BASE_URL}@${username}`,
+    page
+  );
   if (errors) {
     // true if error has to do with tiktok scraping
     return {
@@ -77,8 +61,8 @@ const obtainTiktokProfile = async (username) => {
     };
   }
 };
-const searchTiktok = async (username) => {
-  return await obtainTiktokProfile(username);
+const searchTiktok = async (username, page) => {
+  return await obtainTiktokProfile(username, page);
 };
 
 module.exports = { searchTiktok };

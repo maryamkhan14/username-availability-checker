@@ -9,6 +9,6 @@ const searchProfilesController = async (req, res) => {
     Connection: "keep-alive",
     "Cache-Control": "no-cache",
   });
-  await searchAllNetworks(res, req.params.username);
+  await searchAllNetworks(req, res);
 };
 module.exports = { searchProfilesController };

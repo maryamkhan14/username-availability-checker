@@ -21,19 +21,19 @@ const twitchSearch = (username, res) => {
   });
 };
 
-const tiktokSearch = (username, res) => {
-  return searchTiktok(username).then((result) => {
+const tiktokSearch = (username, page, res) => {
+  return searchTiktok(username, page).then((result) => {
     res.write("data: " + JSON.stringify(result) + "\n\n");
   });
 };
 
-const searchAllNetworks = async (res, username) => {
+const searchAllNetworks = async (req, res) => {
   // execute all searches in parallel, then send an "end" signal after all are complete
   await Promise.allSettled([
-    twitterSearch(username, res),
-    redditSearch(username, res),
-    twitchSearch(username, res),
-    tiktokSearch(username, res),
+    twitterSearch(req.params.username, res),
+    redditSearch(req.params.username, res),
+    twitchSearch(req.params.username, res),
+    tiktokSearch(req.params.username, req.page, res),
   ]).then(() => res.write("data: " + JSON.stringify({ end: "end" }) + "\n\n"));
 };
 module.exports = { searchAllNetworks };
