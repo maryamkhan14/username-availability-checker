@@ -3,25 +3,18 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const searchProfileRoutes = require("./routes/searchProfiles");
-const { createBrowserAndPage } = require("./services/crawlTiktok");
+const puppeteerMiddleware = require("./middleware/puppeteerMiddleware");
 
 const app = express();
 app.use(cors());
 app.options("*", cors());
-const puppeteerCache = null;
-createBrowserAndPage().then((browserAndPage) => {
-  puppeteerCache = browserAndPage;
-});
+app.use(puppeteerMiddleware);
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader("Access-Control-Max-Age", "86400"); // 24 hours
-
-  req.browser = puppeteerCache.browser;
-  req.page = puppeteerCache.page;
-  console.log(req.page);
 
   next();
 });
