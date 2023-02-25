@@ -1,67 +1,71 @@
-const puppeteer = require("puppeteer");
-const path = require("path");
-const BASE_URL = "https://www.tiktok.com/";
+const axios = require("axios");
 
-const scrapeTiktok = async (searchURL, page) => {
-  let userAvailable = false;
-  let errors = null;
-
-  page.on("response", (response) => {
-    // 200 status code is returned when existing profile is found
-    if (response.status() !== 200) userAvailable = true;
-  });
+const obtainTiktokProfile = async (username) => {
+  const uri = `https://tiktok-crawl.onrender.com/crawl/${username}`;
   try {
-    await page.goto(searchURL);
-  } catch (error) {
-    errors = { error };
+    const data = await axios.get(uri, {
+      headers: {
+        "User-Agent": `Username Availability Checker`,
+      },
+    });
+    return data;
+  } catch (e) {
+    // catch Axios API errors
+    return { errors: e.response.data.errors };
   }
-
-  return { errors, userAvailable };
 };
 
-const generateErrorMessages = (scrapeError, username) => {
-  return scrapeError
+const generateErrorMessages = (error, username) => {
+  return error
     ? {
         // Error in scraping Tiktok
-        msg: `Unknown error occurred when scraping Tiktok for the username [${username}]. Please try again at another time.`,
+        msg: `Tiktok: ${error}`,
       }
     : {
-        // Twitch username already exists
+        // Tiktok username already exists
         msg: `The Tiktok username [${username}] is taken.`,
       };
 };
 
-const obtainTiktokProfile = async (username, page) => {
-  let { errors, userAvailable } = await scrapeTiktok(
-    `${BASE_URL}@${username}`,
-    page
-  );
+const searchTiktok = async (username) => {
+  let { errors, data } = await obtainTiktokProfile(username);
   if (errors) {
     // true if error has to do with tiktok scraping
     return {
-      ...generateErrorMessages(true, username),
-      status: 400,
-      type: "TIKTOK_DATA",
-      username: username,
-    };
-  } else if (!userAvailable) {
-    return {
-      ...generateErrorMessages(false, username),
+      ...generateErrorMessages(error, null),
       status: 400,
       type: "TIKTOK_DATA",
       username: username,
     };
   } else {
-    return {
-      msg: `The Tiktok username [${username}] is available!`,
-      status: 200,
-      type: "TIKTOK_DATA",
-      username: username,
-    };
+    let { status } = data;
+
+    // if the Tiktok scraper got a 200 OK response status when searching for the username (which would indicate user exists)
+    if (status == 200)
+      return {
+        ...generateErrorMessages(null, username),
+        status: 400,
+        type: "TIKTOK_DATA",
+        username: username,
+      };
+    else if (status == 404)
+      return {
+        msg: `The Tiktok username [${username}] is available!`,
+        status: 200,
+        type: "TIKTOK_DATA",
+        username: username,
+      };
+    // if the Tiktok scraper got some other type of response status (e.g. 502)
+    else
+      return {
+        ...generateErrorMessages(
+          `An unknown error occurred. Received response status ${status}.`,
+          null
+        ),
+        status: 400,
+        type: "TIKTOK_DATA",
+        username: username,
+      };
   }
 };
-const searchTiktok = async (username, page) => {
-  return await obtainTiktokProfile(username, page);
-};
-
 module.exports = { searchTiktok };

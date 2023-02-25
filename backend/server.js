@@ -3,12 +3,10 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const searchProfileRoutes = require("./routes/searchProfiles");
-const puppeteerMiddleware = require("./middleware/puppeteerMiddleware");
 
 const app = express();
 app.use(cors());
 app.options("*", cors());
-app.use(puppeteerMiddleware);
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Headers",
