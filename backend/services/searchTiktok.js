@@ -3,7 +3,11 @@ const axios = require("axios");
 const obtainTiktokProfile = async (username) => {
   const uri = `https://tiktok-crawl.onrender.com/crawl/${username}`;
   try {
-    const { data } = await axios.get(uri);
+    const { data } = await axios.get(uri, {
+      headers: {
+        "User-Agent": `Username Availability Checker`,
+      },
+    });
     return data;
   } catch (e) {
     // catch Axios API errors
