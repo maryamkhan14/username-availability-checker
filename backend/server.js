@@ -18,6 +18,7 @@ app.use((req, res, next) => {
   createBrowserAndPage().then(({ browser, page }) => {
     req.browser = browser;
     req.page = page;
+    console.log(page);
   });
 
   next();
@@ -30,5 +31,4 @@ app.use("/search", searchProfileRoutes);
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, async () => {
   console.log(`Listening on port ${PORT}`);
-  console.log("Created a browser and page");
 });

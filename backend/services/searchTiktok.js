@@ -11,6 +11,7 @@ const scrapeTiktok = async (searchURL, page) => {
     if (response.status() !== 200) userAvailable = true;
   });
 
+  console.log(page);
   try {
     await page.goto(searchURL);
   } catch (error) {
