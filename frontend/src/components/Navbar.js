@@ -8,6 +8,7 @@ const Navbar = () => {
       display="flex"
       flexDirection="column-reverse"
       alignItems="center"
+      textAlign="center"
       container
     >
       <Typography variant="h3">Is your dream username available?</Typography>
