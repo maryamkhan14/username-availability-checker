@@ -11,12 +11,15 @@ const createBrowser = async () => {
   });
   return browser;
 };
-
-const scrapeTiktok = async (username, res) => {
+const getBrowser = async () => {
   if (!browser) {
+    console.log("creating new browser...");
     browser = await createBrowser();
   }
-  console.log(browser);
+  return browser;
+};
+const scrapeTiktok = async (username, res) => {
+  browser = await getBrowser();
   const page = await browser.newPage();
   // turns request interceptor on
   await page.setRequestInterception(true);
