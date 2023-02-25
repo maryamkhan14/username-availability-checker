@@ -22,7 +22,7 @@ const twitchSearch = async (username, res) => {
 };
 
 const tiktokSearch = async (username, res) => {
-  await searchTiktok(username, res).then((result) => {
+  await searchTiktok(username).then((result) => {
     res.write("data: " + JSON.stringify(result) + "\n\n");
   });
 };

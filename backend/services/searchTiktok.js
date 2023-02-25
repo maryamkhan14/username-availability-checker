@@ -3,11 +3,7 @@ const axios = require("axios");
 const obtainTiktokProfile = async (username) => {
   const uri = `https://tiktok-crawl.onrender.com/crawl/${username}`;
   try {
-    const data = await axios.get(uri, {
-      headers: {
-        "User-Agent": `Username Availability Checker`,
-      },
-    });
+    const { data } = await axios.get(uri);
     return data;
   } catch (e) {
     // catch Axios API errors
@@ -29,6 +25,7 @@ const generateErrorMessages = (error, username) => {
 
 const searchTiktok = async (username) => {
   let { errors, data } = await obtainTiktokProfile(username);
+
   if (errors) {
     // true if error has to do with tiktok scraping
     return {
@@ -39,7 +36,6 @@ const searchTiktok = async (username) => {
     };
   } else {
     let { status } = data;
-
     // if the Tiktok scraper got a 200 OK response status when searching for the username (which would indicate user exists)
     if (status == 200)
       return {
