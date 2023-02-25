@@ -31,12 +31,14 @@ const scrapeTiktok = async (username, res) => {
   });
 
   page.on("response", (response) => {
-    res.status(200).json({ responseStatus: response.status(), errors: null });
+    res.status(200).json({ data: { status: response.status() }, errors: null });
   });
   try {
     await page.goto(`${BASE_URL}@${username}`);
   } catch (error) {
-    res.status(200).json({ responseStatus: response.status(), errors: error });
+    res
+      .status(200)
+      .json({ data: { status: response.status() }, errors: error });
   }
 
   await page.close();
