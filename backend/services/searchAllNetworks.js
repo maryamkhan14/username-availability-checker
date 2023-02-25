@@ -4,27 +4,37 @@ const { searchReddit } = require("./searchReddit");
 const { searchTiktok } = require("./searchTiktok");
 
 const twitterSearch = (username, res) => {
-  searchTwitter(username).then((result) => {
-    res.write("data: " + JSON.stringify(result) + "\n\n");
-  });
+  searchTwitter(username)
+    .then((result) => {
+      res.write("data: " + JSON.stringify(result) + "\n\n");
+    })
+    .then(() => console.log("resolved"));
 };
 
 const redditSearch = (username, res) => {
-  searchReddit(username).then((result) => {
-    res.write("data: " + JSON.stringify(result) + "\n\n");
-  });
+  searchReddit(username)
+    .then((result) => {
+      res
+        .write("data: " + JSON.stringify(result) + "\n\n")
+        .then(() => console.log("resolved"));
+    })
+    .then(() => console.log("resolved"));
 };
 
 const twitchSearch = (username, res) => {
-  searchTwitch(username).then((result) => {
-    res.write("data: " + JSON.stringify(result) + "\n\n");
-  });
+  searchTwitch(username)
+    .then((result) => {
+      res.write("data: " + JSON.stringify(result) + "\n\n");
+    })
+    .then(() => console.log("resolved"));
 };
 
 const tiktokSearch = (username, page, res) => {
-  searchTiktok(username, page).then((result) => {
-    res.write("data: " + JSON.stringify(result) + "\n\n");
-  });
+  searchTiktok(username, page)
+    .then((result) => {
+      res.write("data: " + JSON.stringify(result) + "\n\n");
+    })
+    .then(() => console.log("resolved"));
 };
 
 const searchAllNetworks = async (req, res) => {
