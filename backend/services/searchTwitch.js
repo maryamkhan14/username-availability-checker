@@ -24,11 +24,11 @@ const generateErrorMessages = ({ login: username, error, message }) => {
   return error
     ? {
         // Error in grabbing data
-        msg: `${message}. Try again.`,
+        msg: `Twitch Service Error: ${message}. Try again.`,
       }
     : {
         // Twitch username already exists
-        msg: `The Twitch username [${username}] is taken.`,
+        msg: `Twitch: Username [${username}] is taken.`,
       };
 };
 const searchTwitch = async (username) => {
@@ -52,7 +52,7 @@ const searchTwitch = async (username) => {
     };
   } else {
     return {
-      msg: `The Twitch username [${username}] is available!`,
+      msg: `Twitch: Username [${username}] is available!`,
       status: 200,
       type: "TWITCH_DATA",
       username: username,

@@ -22,7 +22,7 @@ const generateErrorMessages = (error) => {
   return error.message
     ? {
         // AxiosError objects' error message property is called message
-        msg: `${error.message}.`,
+        msg: `Twitter Service Error: ${error.message}. Try again.`,
       }
     : {
         // Twitter API error results do not have that array, and their message property is called detail
@@ -33,7 +33,7 @@ const searchTwitter = async (username) => {
   const { data, errors } = await obtainTwitterProfile(username);
   if (errors && errors[0].title && errors[0].title === "Not Found Error") {
     return {
-      msg: `The Twitter username [${username}] is available!`,
+      msg: `Twitter: Username [${username}] is available!`,
       status: 200,
       type: "TWITTER_DATA",
       username: username,

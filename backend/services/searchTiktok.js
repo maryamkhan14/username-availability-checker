@@ -19,11 +19,11 @@ const generateErrorMessages = (error, username) => {
   return error
     ? {
         // Error in scraping Tiktok
-        msg: `Tiktok: ${error}`,
+        msg: `Tiktok Service Error: ${error}. Try again.`,
       }
     : {
         // Tiktok username already exists
-        msg: `The Tiktok username [${username}] is taken.`,
+        msg: `Tiktok: Username [${username}] is taken.`,
       };
 };
 
@@ -50,7 +50,7 @@ const searchTiktok = async (username) => {
       };
     else if (status == 404)
       return {
-        msg: `The Tiktok username [${username}] is available!`,
+        msg: `Tiktok: Username [${username}] is available!`,
         status: 200,
         type: "TIKTOK_DATA",
         username: username,
