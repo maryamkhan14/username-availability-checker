@@ -8,6 +8,7 @@ const puppeteerMiddleware = (req, res, next) => {
     return next();
   } else {
     createBrowserAndPage().then((browserAndPage) => {
+      console.log("created cache");
       puppeteerCache = browserAndPage;
       req.browser = puppeteerCache.browser;
       req.page = puppeteerCache.page;
