@@ -9,13 +9,22 @@ function App() {
   return (
     <BrowserRouter>
       <Grid item xs={12} container display="flex" gap={3}>
-        <Navbar />
         <Grid
           item
           xs={12}
           container
           display="flex"
-          className="pages"
+          id="navbar-container"
+          justifyContent={"center"}
+        >
+          <Navbar />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          container
+          display="flex"
+          id="main-content-container"
           justifyContent={"center"}
         >
           <Routes>
@@ -27,7 +36,7 @@ function App() {
           xs={12}
           container
           display="flex"
-          className="pages"
+          id="footer-container"
           justifyContent={"center"}
         >
           <Footer />
