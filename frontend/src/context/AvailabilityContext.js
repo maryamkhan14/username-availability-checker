@@ -59,8 +59,8 @@ export const AvailabilityContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(usernameAvailabilityReducer, {
     results: {
       twitterData: { type: "TWITTER_DATA" },
-      twitchData: { type: "TWITCH_DATA" },
       redditData: { type: "REDDIT_DATA" },
+      twitchData: { type: "TWITCH_DATA" },
       tiktokData: { type: "TIKTOK_DATA" },
     },
     searchActive: false,
