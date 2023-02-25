@@ -1,20 +1,21 @@
 const puppeteer = require("puppeteer");
 const path = require("path");
 const BASE_URL = "https://www.tiktok.com/";
-
+let browser = null;
 const createBrowser = async () => {
   const userDataDirPath = path.join(__dirname, "/data");
-  const browser = await puppeteer.launch({
+  browser = await puppeteer.launch({
     headless: true,
     userDataDir: `${userDataDirPath}`,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
-
   return browser;
 };
 
 const scrapeTiktok = async (username, res) => {
-  const browser = await createBrowser();
+  if (!browser) {
+    browser = await createBrowser();
+  }
   const page = await browser.newPage();
   // turns request interceptor on
   await page.setRequestInterception(true);
@@ -28,11 +29,12 @@ const scrapeTiktok = async (username, res) => {
   page.on("response", (response) => {
     res.status(200).json({ responseStatus: response.status(), errors: null });
   });
-
   try {
-    await page.goto(`${BASE_URL}@${username}`);
+    page.goto(`${BASE_URL}@${username}`);
   } catch (error) {
     res.status(200).json({ responseStatus: response.status(), errors: error });
   }
+
+  await page.close();
 };
 module.exports = { scrapeTiktok };
