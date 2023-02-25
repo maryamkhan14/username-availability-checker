@@ -16,6 +16,7 @@ const scrapeTiktok = async (username, res) => {
   if (!browser) {
     browser = await createBrowser();
   }
+  console.log(browser);
   const page = await browser.newPage();
   // turns request interceptor on
   await page.setRequestInterception(true);
