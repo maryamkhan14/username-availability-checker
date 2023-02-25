@@ -22,7 +22,7 @@ const twitchSearch = (username, res) => {
 };
 
 const tiktokSearch = (username, page, res) => {
-  return searchTiktok(username, page).then((result) => {
+  searchTiktok(username, page).then((result) => {
     res.write("data: " + JSON.stringify(result) + "\n\n");
   });
 };

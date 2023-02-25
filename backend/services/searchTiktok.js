@@ -7,12 +7,12 @@ const scrapeTiktok = async (searchURL, page) => {
   let errors = null;
 
   page.on("response", (response) => {
+    console.log("received response");
     // 200 status code is returned when existing profile is found
     if (response.status() !== 200) userAvailable = true;
   });
-
-  console.log(page);
   try {
+    console.log("searching for Url");
     await page.goto(searchURL);
   } catch (error) {
     errors = { error };
