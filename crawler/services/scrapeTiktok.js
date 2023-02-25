@@ -34,7 +34,7 @@ const scrapeTiktok = async (username, res) => {
     res.status(200).json({ responseStatus: response.status(), errors: null });
   });
   try {
-    page.goto(`${BASE_URL}@${username}`);
+    await page.goto(`${BASE_URL}@${username}`);
   } catch (error) {
     res.status(200).json({ responseStatus: response.status(), errors: error });
   }
