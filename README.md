@@ -4,9 +4,10 @@ Want to pick up a new username? Here's [a tool to effortlessly check what's avai
 
 ## ✅ Demo
 
+<div style="display: flex; padding: 10px;">
 <img src='username-availability-checker-desktop.gif' title='Desktop Walkthrough' width='' alt='Desktop Walkthrough' />
 <img src='https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzJjM2M5MTdjYzI2Yjc1ZmIyMmFjYmNkMDVjNDM1ZTdjZjE1M2JjMSZjdD1n/HKZl29APiBuRyBjmUj/giphy.gif' title='Mobile Walkthrough' width='' alt='Mobile Walkthrough' />
-
+</div>
 ## 🔥 Up and Coming Features
 
 - Search notifications: If a username you want isn't available, set a frequency for how often the app should check for its availability. When it's available, we'll let you know.
