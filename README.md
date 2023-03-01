@@ -4,23 +4,18 @@ Want to pick up a new username? Here's [a tool to effortlessly check what's avai
 
 ## ✅ Demo
 
-<div
-  style="display:flex; align-items: center; justify-content: space-between; min-width: 100%;"
->
-  <img
+<img
     src="username-availability-checker-desktop.gif"
     title="Desktop Walkthrough"
-    width="70%"
-    style="margin: 10px"
+    width="75%"
     alt="Desktop Walkthrough"
   />
-  <img
+<img
     src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzJjM2M5MTdjYzI2Yjc1ZmIyMmFjYmNkMDVjNDM1ZTdjZjE1M2JjMSZjdD1n/HKZl29APiBuRyBjmUj/giphy.gif"
     title="Mobile Walkthrough"
-    style="margin: 10px"
+    width = "20%"
     alt="Mobile Walkthrough"
   />
-</div>
 
 ## 🔥 Up and Coming Features
 
